@@ -507,8 +507,20 @@ section.hero { padding: 32px 0 40px; }
 
 /* Kakao Channel — official yellow */
 .ch-kakao { background: #FEE500; color: #371D1E; }
-/* Naver Blog — Naver green */
+/* Naver Blog — Naver green with "blog" wordmark */
 .ch-blog { background: #03C75A; color: #fff; }
+.ch-blog .blog-mark {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 15px;
+  letter-spacing: -0.05em;
+  color: #fff;
+  line-height: 1;
+  display: inline-block;
+  /* slight slant emphasises the brand feel */
+  transform: translateY(-1px);
+}
 /* Naver Place — white with green border + red pin (마커 색감) */
 .ch-place { background: #fff; color: #FF3B30; border: 2px solid #03C75A; }
 .ch-place .pin-stroke { color: #03C75A; }
