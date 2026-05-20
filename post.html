@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>매물 등록 — HOMEPICK</title>
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">
+      <span class="mark">H</span>
+      <span class="name">HOME<em>PICK</em></span>
+    </a>
+    <nav class="nav">
+      <a href="index.html">홈</a>
+      <a href="listings.html?type=sale">매매</a>
+      <a href="listings.html?type=rent">임대</a>
+      <a href="listings.html?type=presale">분양</a>
+      <a href="listings.html">전체 매물</a>
+    </nav>
+    <div class="header-cta">
+      <a href="listings.html" class="btn btn-ghost">매물 찾기</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-head">
+    <div class="container">
+      <div class="crumb"><a href="index.html">HOMEPICK</a> / 매물 등록</div>
+      <h1>매물 등록, <span class="serif">3분</span>이면 끝.</h1>
+      <p class="lead">기본 정보와 사진만 올리시면 담당자가 검수 후 노출해 드립니다.<br/>* 표시는 필수 입력 항목입니다.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:8px;">
+    <div class="container">
+      <form id="post-form" class="form-card">
+
+        <div class="form-section">
+          <h3>1. 매물 구분</h3>
+          <div class="form-row">
+            <div class="field">
+              <label>거래 유형 <span class="req">*</span></label>
+              <select name="type" required>
+                <option value="sale">매매</option>
+                <option value="rent">임대</option>
+                <option value="presale">분양</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>매물 용도</label>
+              <select name="purpose">
+                <option>오피스</option>
+                <option>지식산업센터</option>
+                <option>상가</option>
+                <option>사옥</option>
+                <option>기타</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3>2. 매물 기본 정보</h3>
+          <div class="form-row full">
+            <div class="field">
+              <label>매물 제목 <span class="req">*</span></label>
+              <input type="text" name="title" required maxlength="60" placeholder="예) 강남 테헤란로 신축 오피스 매매" />
+              <div class="hint">최대 60자. 입지·특징을 한 줄로 표현해 주세요.</div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label>주소 / 위치 <span class="req">*</span></label>
+              <input type="text" name="location" required placeholder="예) 서울 강남구 역삼동" />
+            </div>
+            <div class="field">
+              <label>빌딩명</label>
+              <input type="text" name="building" placeholder="예) 테헤란 프라임" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3>3. 면적 · 층수 · 가격</h3>
+          <div class="form-row">
+            <div class="field">
+              <label>전용 면적 (㎡)</label>
+              <input type="number" name="area_exclusive" min="0" step="0.01" placeholder="예) 82.5" />
+            </div>
+            <div class="field">
+              <label>계약 면적 (㎡)</label>
+              <input type="number" name="area_contract" min="0" step="0.01" placeholder="예) 165" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label>층수</label>
+              <input type="text" name="floor" placeholder="예) 7층 / 15층" />
+            </div>
+            <div class="field">
+              <label>주차</label>
+              <input type="text" name="parking" placeholder="예) 2대" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label>가격 <span class="req">*</span></label>
+              <input type="text" name="price" required placeholder="예) 12억 8,000 / 보증금 3,000만 / 월 270만" />
+              <div class="hint">매매: 매매가, 임대: 보증금/월세, 분양: 분양가</div>
+            </div>
+            <div class="field">
+              <label>준공 (입주) 연도</label>
+              <input type="text" name="built" placeholder="예) 2024" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3>4. 매물 사진</h3>
+          <div class="image-drop" id="photo-drop">
+            <div class="ic">📷</div>
+            <p>클릭하거나 사진을 끌어다 놓으세요</p>
+            <span>JPG, PNG · 최대 8장</span>
+            <input type="file" id="photo-input" accept="image/*" multiple />
+          </div>
+          <div class="preview-grid" id="photo-preview"></div>
+        </div>
+
+        <div class="form-section">
+          <h3>5. 상세 설명</h3>
+          <div class="form-row full">
+            <div class="field">
+              <label>매물 소개</label>
+              <textarea name="description" placeholder="매물의 특장점, 주변 환경, 입주 가능 시기 등을 자유롭게 작성해 주세요."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <a href="index.html" class="btn btn-outline btn-lg">취소</a>
+          <button type="submit" class="btn btn-primary btn-lg">매물 등록하기</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom" style="border:0;padding-top:0;">
+      <span>© <span id="year">2026</span> HOMEPICK. All rights reserved.</span>
+      <span>서울 강남구 테헤란로 152 · 1588-0000</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

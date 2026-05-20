@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HOMEPICK — 당신의 완벽한 공간을 찾다</title>
+<meta name="description" content="HOMEPICK은 매매·임대·분양 오피스 매물을 큐레이션하는 부동산 플랫폼입니다." />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">
+      <span class="mark">H</span>
+      <span class="name">HOME<em>PICK</em></span>
+    </a>
+    <nav class="nav">
+      <a href="index.html" class="active">홈</a>
+      <a href="listings.html?type=sale">매매</a>
+      <a href="listings.html?type=rent">임대</a>
+      <a href="listings.html?type=presale">분양</a>
+      <a href="listings.html">전체 매물</a>
+    </nav>
+    <div class="header-cta">
+      <a href="listings.html" class="btn btn-ghost">매물 찾기</a>
+      <a href="post.html" class="btn btn-primary">+ 매물 등록</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <span class="hero-eyebrow"><span class="dot"></span> 2026 봄 시즌 신규 매물 1,240+</span>
+        <h1>당신의 다음 공간,<br/><span class="accent">완벽하게</span> 골라드립니다.</h1>
+        <p class="hero-sub">매매·임대·분양까지. 검증된 매물만 모아둔 HOMEPICK에서 단 3분 안에 비교하고 결정하세요.</p>
+
+        <form class="search-card" id="hero-search">
+          <div class="search-tabs">
+            <button type="button" class="active">전체</button>
+            <button type="button">매매</button>
+            <button type="button">임대</button>
+            <button type="button">분양</button>
+          </div>
+          <input id="hero-q" class="search-input" type="text" placeholder="지역·빌딩명·역세권으로 검색해 보세요" />
+          <button type="submit" class="btn btn-accent">검색</button>
+        </form>
+
+        <div class="hero-stats">
+          <div class="hero-stat"><strong id="stat-total">1,240</strong><span>실시간 매물</span></div>
+          <div class="hero-stat"><strong>320+</strong><span>제휴 빌딩</span></div>
+          <div class="hero-stat"><strong>4.9</strong><span>고객 만족도</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="pattern"></div>
+        <svg class="building" viewBox="0 0 320 360" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="g1" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#0B1B2B"/>
+              <stop offset="100%" stop-color="#1E3550"/>
+            </linearGradient>
+            <linearGradient id="g2" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#E97C2A"/>
+              <stop offset="100%" stop-color="#C45D14"/>
+            </linearGradient>
+          </defs>
+          <!-- back building -->
+          <rect x="30" y="100" width="90" height="240" fill="url(#g2)" rx="6"/>
+          <!-- main tower -->
+          <rect x="110" y="40" width="120" height="300" fill="url(#g1)" rx="8"/>
+          <!-- right building -->
+          <rect x="220" y="140" width="80" height="200" fill="#354A5F" rx="6"/>
+          <!-- windows main -->
+          <g fill="rgba(255,255,255,0.85)">
+            <rect x="120" y="60" width="14" height="14" rx="2"/>
+            <rect x="142" y="60" width="14" height="14" rx="2"/>
+            <rect x="164" y="60" width="14" height="14" rx="2"/>
+            <rect x="186" y="60" width="14" height="14" rx="2"/>
+            <rect x="208" y="60" width="14" height="14" rx="2"/>
+
+            <rect x="120" y="84" width="14" height="14" rx="2"/>
+            <rect x="142" y="84" width="14" height="14" rx="2" fill="rgba(255,212,128,0.95)"/>
+            <rect x="164" y="84" width="14" height="14" rx="2"/>
+            <rect x="186" y="84" width="14" height="14" rx="2"/>
+            <rect x="208" y="84" width="14" height="14" rx="2"/>
+
+            <rect x="120" y="108" width="14" height="14" rx="2"/>
+            <rect x="142" y="108" width="14" height="14" rx="2"/>
+            <rect x="164" y="108" width="14" height="14" rx="2" fill="rgba(255,212,128,0.95)"/>
+            <rect x="186" y="108" width="14" height="14" rx="2"/>
+            <rect x="208" y="108" width="14" height="14" rx="2"/>
+
+            <rect x="120" y="132" width="14" height="14" rx="2"/>
+            <rect x="142" y="132" width="14" height="14" rx="2"/>
+            <rect x="164" y="132" width="14" height="14" rx="2"/>
+            <rect x="186" y="132" width="14" height="14" rx="2" fill="rgba(255,212,128,0.95)"/>
+            <rect x="208" y="132" width="14" height="14" rx="2"/>
+
+            <rect x="120" y="156" width="14" height="14" rx="2"/>
+            <rect x="142" y="156" width="14" height="14" rx="2"/>
+            <rect x="164" y="156" width="14" height="14" rx="2"/>
+            <rect x="186" y="156" width="14" height="14" rx="2"/>
+            <rect x="208" y="156" width="14" height="14" rx="2"/>
+
+            <rect x="120" y="180" width="14" height="14" rx="2" fill="rgba(255,212,128,0.95)"/>
+            <rect x="142" y="180" width="14" height="14" rx="2"/>
+            <rect x="164" y="180" width="14" height="14" rx="2"/>
+            <rect x="186" y="180" width="14" height="14" rx="2"/>
+            <rect x="208" y="180" width="14" height="14" rx="2"/>
+
+            <rect x="120" y="204" width="14" height="14" rx="2"/>
+            <rect x="142" y="204" width="14" height="14" rx="2"/>
+            <rect x="164" y="204" width="14" height="14" rx="2"/>
+            <rect x="186" y="204" width="14" height="14" rx="2"/>
+            <rect x="208" y="204" width="14" height="14" rx="2" fill="rgba(255,212,128,0.95)"/>
+
+            <rect x="120" y="228" width="14" height="14" rx="2"/>
+            <rect x="142" y="228" width="14" height="14" rx="2"/>
+            <rect x="164" y="228" width="14" height="14" rx="2"/>
+            <rect x="186" y="228" width="14" height="14" rx="2"/>
+            <rect x="208" y="228" width="14" height="14" rx="2"/>
+
+            <rect x="120" y="252" width="14" height="14" rx="2"/>
+            <rect x="142" y="252" width="14" height="14" rx="2"/>
+            <rect x="164" y="252" width="14" height="14" rx="2" fill="rgba(255,212,128,0.95)"/>
+            <rect x="186" y="252" width="14" height="14" rx="2"/>
+            <rect x="208" y="252" width="14" height="14" rx="2"/>
+
+            <rect x="120" y="276" width="14" height="14" rx="2"/>
+            <rect x="142" y="276" width="14" height="14" rx="2"/>
+            <rect x="164" y="276" width="14" height="14" rx="2"/>
+            <rect x="186" y="276" width="14" height="14" rx="2"/>
+            <rect x="208" y="276" width="14" height="14" rx="2"/>
+
+            <rect x="120" y="300" width="14" height="14" rx="2"/>
+            <rect x="142" y="300" width="14" height="14" rx="2"/>
+            <rect x="164" y="300" width="14" height="14" rx="2"/>
+            <rect x="186" y="300" width="14" height="14" rx="2"/>
+            <rect x="208" y="300" width="14" height="14" rx="2"/>
+          </g>
+          <!-- side windows -->
+          <g fill="rgba(255,255,255,0.6)">
+            <rect x="44" y="120" width="10" height="10" rx="1"/>
+            <rect x="62" y="120" width="10" height="10" rx="1"/>
+            <rect x="80" y="120" width="10" height="10" rx="1"/>
+            <rect x="98" y="120" width="10" height="10" rx="1"/>
+            <rect x="44" y="140" width="10" height="10" rx="1"/>
+            <rect x="62" y="140" width="10" height="10" rx="1"/>
+            <rect x="80" y="140" width="10" height="10" rx="1"/>
+            <rect x="98" y="140" width="10" height="10" rx="1"/>
+            <rect x="44" y="160" width="10" height="10" rx="1"/>
+            <rect x="62" y="160" width="10" height="10" rx="1"/>
+            <rect x="80" y="160" width="10" height="10" rx="1"/>
+            <rect x="98" y="160" width="10" height="10" rx="1"/>
+            <rect x="44" y="180" width="10" height="10" rx="1"/>
+            <rect x="62" y="180" width="10" height="10" rx="1"/>
+            <rect x="80" y="180" width="10" height="10" rx="1"/>
+            <rect x="98" y="180" width="10" height="10" rx="1"/>
+            <rect x="44" y="200" width="10" height="10" rx="1"/>
+            <rect x="62" y="200" width="10" height="10" rx="1"/>
+            <rect x="80" y="200" width="10" height="10" rx="1"/>
+            <rect x="98" y="200" width="10" height="10" rx="1"/>
+            <rect x="44" y="220" width="10" height="10" rx="1"/>
+            <rect x="62" y="220" width="10" height="10" rx="1"/>
+            <rect x="80" y="220" width="10" height="10" rx="1"/>
+            <rect x="98" y="220" width="10" height="10" rx="1"/>
+            <rect x="44" y="240" width="10" height="10" rx="1"/>
+            <rect x="62" y="240" width="10" height="10" rx="1"/>
+            <rect x="80" y="240" width="10" height="10" rx="1"/>
+            <rect x="98" y="240" width="10" height="10" rx="1"/>
+            <rect x="44" y="260" width="10" height="10" rx="1"/>
+            <rect x="62" y="260" width="10" height="10" rx="1"/>
+            <rect x="80" y="260" width="10" height="10" rx="1"/>
+            <rect x="98" y="260" width="10" height="10" rx="1"/>
+          </g>
+          <g fill="rgba(255,255,255,0.5)">
+            <rect x="234" y="160" width="12" height="12" rx="2"/>
+            <rect x="254" y="160" width="12" height="12" rx="2"/>
+            <rect x="274" y="160" width="12" height="12" rx="2"/>
+            <rect x="234" y="180" width="12" height="12" rx="2"/>
+            <rect x="254" y="180" width="12" height="12" rx="2"/>
+            <rect x="274" y="180" width="12" height="12" rx="2"/>
+            <rect x="234" y="200" width="12" height="12" rx="2"/>
+            <rect x="254" y="200" width="12" height="12" rx="2"/>
+            <rect x="274" y="200" width="12" height="12" rx="2"/>
+            <rect x="234" y="220" width="12" height="12" rx="2"/>
+            <rect x="254" y="220" width="12" height="12" rx="2"/>
+            <rect x="274" y="220" width="12" height="12" rx="2"/>
+            <rect x="234" y="240" width="12" height="12" rx="2"/>
+            <rect x="254" y="240" width="12" height="12" rx="2"/>
+            <rect x="274" y="240" width="12" height="12" rx="2"/>
+            <rect x="234" y="260" width="12" height="12" rx="2"/>
+            <rect x="254" y="260" width="12" height="12" rx="2"/>
+            <rect x="274" y="260" width="12" height="12" rx="2"/>
+            <rect x="234" y="280" width="12" height="12" rx="2"/>
+            <rect x="254" y="280" width="12" height="12" rx="2"/>
+            <rect x="274" y="280" width="12" height="12" rx="2"/>
+            <rect x="234" y="300" width="12" height="12" rx="2"/>
+            <rect x="254" y="300" width="12" height="12" rx="2"/>
+            <rect x="274" y="300" width="12" height="12" rx="2"/>
+          </g>
+        </svg>
+
+        <div class="float-card float-1">
+          <div class="ic green">↑</div>
+          <div>
+            <strong>+12.4%</strong>
+            <span>이번 분기 거래량</span>
+          </div>
+        </div>
+        <div class="float-card float-2">
+          <div class="ic">🏢</div>
+          <div>
+            <strong>5,200원 / 평</strong>
+            <span>평균 관리비</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>카테고리로 <span class="serif">탐색</span>하기</h2>
+          <p class="lead">목적에 맞는 매물을 빠르게 찾아보세요.</p>
+        </div>
+      </div>
+      <div class="cat-grid">
+        <a class="cat-tile featured" href="listings.html?type=sale">
+          <div class="ic-lg" style="color:#fff;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12L12 3l9 9"/><path d="M5 10v10h14V10"/></svg>
+          </div>
+          <h3>오피스 매매</h3>
+          <p>장기 보유·자산 운용을 위한 검증된 매물</p>
+          <div class="meta">580+ 매물</div>
+        </a>
+        <a class="cat-tile" href="listings.html?type=rent">
+          <div class="ic-lg">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B1B2B" stroke-width="2"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M8 8V5a4 4 0 0 1 8 0v3"/></svg>
+          </div>
+          <h3>오피스 임대</h3>
+          <p>입주 가능한 단기·장기 임대 매물</p>
+          <div class="meta">420+ 매물</div>
+        </a>
+        <a class="cat-tile" href="listings.html?type=presale">
+          <div class="ic-lg">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B1B2B" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3>신규 분양</h3>
+          <p>전국 신축 오피스·지식산업센터 분양</p>
+          <div class="meta">36개 단지</div>
+        </a>
+        <a class="cat-tile" href="listings.html">
+          <div class="ic-lg">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B1B2B" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3"/></svg>
+          </div>
+          <h3>전체 매물 보기</h3>
+          <p>지역·면적·가격으로 정밀 검색</p>
+          <div class="meta">실시간 업데이트</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED LISTINGS -->
+  <section style="padding-top:24px;">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2><span class="serif">엄선된</span> 추천 매물</h2>
+          <p class="lead">에디터가 직접 검수한 프리미엄 매물</p>
+        </div>
+        <a href="listings.html" class="more">전체 보기 →</a>
+      </div>
+
+      <div class="filters">
+        <button class="chip active" data-filter="all">전체</button>
+        <button class="chip" data-filter="sale">매매</button>
+        <button class="chip" data-filter="rent">임대</button>
+        <button class="chip" data-filter="presale">분양</button>
+      </div>
+
+      <div class="listing-grid" id="featured-grid"></div>
+    </div>
+  </section>
+
+  <!-- BANNER -->
+  <section>
+    <div class="container">
+      <div class="banner">
+        <div>
+          <h2>가지고 계신 매물,<br/><span class="serif">3분</span>이면 등록 완료.</h2>
+          <p>사진 1장과 기본 정보만 입력하면 끝. HOMEPICK의 전문 컨설턴트가 직접 매물을 검수하고 노출을 도와드립니다.</p>
+          <div class="actions">
+            <a href="post.html" class="btn btn-accent btn-lg">+ 매물 등록하기</a>
+            <a href="#" class="btn btn-outline btn-lg" style="color:#fff;border-color:rgba(255,255,255,0.3);">상담 신청</a>
+          </div>
+        </div>
+        <div class="banner-visual">
+          <div class="stat-card">
+            <div class="stat-grid">
+              <div>
+                <strong>평균 3.2일</strong>
+                <span>매물 노출 시작</span>
+              </div>
+              <div>
+                <strong>92%</strong>
+                <span>30일 내 응답률</span>
+              </div>
+              <div>
+                <strong>무료</strong>
+                <span>등록 수수료</span>
+                <em>중개 성사 시에만</em>
+              </div>
+              <div>
+                <strong>1:1 컨설팅</strong>
+                <span>전담 매니저 배정</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <span class="mark">H</span>
+          <span class="name">HOME<em>PICK</em></span>
+        </div>
+        <p>HOMEPICK은 매매·임대·분양 오피스 매물을 검증·큐레이션하는 부동산 플랫폼입니다.</p>
+      </div>
+      <div>
+        <h4>매물</h4>
+        <ul>
+          <li><a href="listings.html?type=sale">매매</a></li>
+          <li><a href="listings.html?type=rent">임대</a></li>
+          <li><a href="listings.html?type=presale">분양</a></li>
+          <li><a href="listings.html">전체 보기</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>서비스</h4>
+        <ul>
+          <li><a href="post.html">매물 등록</a></li>
+          <li><a href="#">상담 신청</a></li>
+          <li><a href="#">업무 제휴</a></li>
+          <li><a href="#">자주 묻는 질문</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>회사</h4>
+        <ul>
+          <li><a href="#">소개</a></li>
+          <li><a href="#">채용</a></li>
+          <li><a href="#">이용약관</a></li>
+          <li><a href="#">개인정보처리방침</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> HOMEPICK. All rights reserved.</span>
+      <span>서울 강남구 테헤란로 152 · 1588-0000</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
