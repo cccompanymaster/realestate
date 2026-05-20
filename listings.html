@@ -6,7 +6,16 @@
 <title>매물 — HOMEPICK</title>
 <link rel="stylesheet" href="assets/css/style.css" />
 </head>
-<body>
+<body class="is-loading">
+
+<div id="loader" class="loader" aria-hidden="true">
+  <div class="loader-logo">
+    <span class="loader-mark">H</span>
+    <span class="loader-name">HOME<em>PICK</em></span>
+  </div>
+  <div class="loader-bar"><span></span></div>
+  <div class="loader-cap">Loading your space</div>
+</div>
 
 <header class="site-header">
   <div class="container header-inner">
@@ -33,7 +42,7 @@
     <div class="container">
       <div class="crumb"><a href="index.html">HOMEPICK</a> / 전체 매물</div>
       <h1>지금 거래 가능한 <span class="serif">매물</span></h1>
-      <p class="lead">총 <strong id="result-count" style="color:var(--ink);">0</strong>건의 매물이 등록되어 있습니다.</p>
+      <p class="lead">총 <strong id="result-count" style="color:var(--ink);">0</strong>건의 매물이 거래 대기 중입니다.</p>
     </div>
   </section>
 

@@ -361,6 +361,16 @@
       </div>`;
   }
 
+  // ---------- loader ----------
+  function hideLoader() {
+    const loader = document.getElementById('loader');
+    if (!loader) return;
+    loader.classList.add('is-hidden');
+    document.body.classList.remove('is-loading');
+    // Remove from DOM after the fade so it can't intercept scrolls
+    setTimeout(() => loader.parentNode && loader.parentNode.removeChild(loader), 600);
+  }
+
   // ---------- boot ----------
   document.addEventListener('DOMContentLoaded', () => {
     initIndex();
@@ -372,6 +382,17 @@
     const y = document.getElementById('year');
     if (y) y.textContent = new Date().getFullYear();
   });
+
+  // Wait for full load (images/fonts) then hide loader with a minimum delay
+  // so the brand moment is visible even on fast connections.
+  const loadStart = Date.now();
+  const MIN_LOADER_MS = 700;
+  window.addEventListener('load', () => {
+    const elapsed = Date.now() - loadStart;
+    setTimeout(hideLoader, Math.max(0, MIN_LOADER_MS - elapsed));
+  });
+  // Safety net: never let the loader linger
+  setTimeout(hideLoader, 3500);
 
   // expose for debug
   window.HOMEPICK = { loadAll, saveListing, getById };

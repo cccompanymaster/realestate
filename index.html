@@ -7,7 +7,16 @@
 <meta name="description" content="HOMEPICK은 매매·임대·분양 오피스 매물을 큐레이션하는 부동산 플랫폼입니다." />
 <link rel="stylesheet" href="assets/css/style.css" />
 </head>
-<body>
+<body class="is-loading">
+
+<div id="loader" class="loader" aria-hidden="true">
+  <div class="loader-logo">
+    <span class="loader-mark">H</span>
+    <span class="loader-name">HOME<em>PICK</em></span>
+  </div>
+  <div class="loader-bar"><span></span></div>
+  <div class="loader-cap">Loading your space</div>
+</div>
 
 <header class="site-header">
   <div class="container header-inner">
@@ -35,9 +44,9 @@
   <section class="hero">
     <div class="container hero-grid">
       <div class="hero-text">
-        <span class="hero-eyebrow"><span class="dot"></span> 2026 봄 시즌 신규 매물 1,240+</span>
-        <h1>당신의 다음 공간,<br/><span class="accent">완벽하게</span> 골라드립니다.</h1>
-        <p class="hero-sub">매매·임대·분양까지. 검증된 매물만 모아둔 HOMEPICK에서 단 3분 안에 비교하고 결정하세요.</p>
+        <span class="hero-eyebrow"><span class="dot"></span> 2026 봄 시즌 · 신규 매물 1,240+</span>
+        <h1>다음 사무실,<br/><span class="accent">완벽하게</span> 골라드립니다.</h1>
+        <p class="hero-sub">매매·임대·분양까지 — 검증된 매물만 모아둔 HOMEPICK에서<br class="br-md"/>단 3분이면 비교하고 결정할 수 있습니다.</p>
 
         <form class="search-card" id="hero-search">
           <div class="search-tabs">
@@ -223,6 +232,11 @@
         </div>
       </div>
     </div>
+
+    <div class="hero-scroll" aria-hidden="true">
+      <span>Scroll</span>
+      <span class="line"></span>
+    </div>
   </section>
 
   <!-- CATEGORIES -->
@@ -299,7 +313,7 @@
       <div class="banner">
         <div>
           <h2>가지고 계신 매물,<br/><span class="serif">3분</span>이면 등록 완료.</h2>
-          <p>사진 1장과 기본 정보만 입력하면 끝. HOMEPICK의 전문 컨설턴트가 직접 매물을 검수하고 노출을 도와드립니다.</p>
+          <p>사진 한 장과 기본 정보만 입력하면 끝. 전문 컨설턴트가 직접 검수해<br class="br-md"/>가장 적합한 수요자에게 노출해 드립니다.</p>
           <div class="actions">
             <a href="post.html" class="btn btn-accent btn-lg">+ 매물 등록하기</a>
             <a href="#" class="btn btn-outline btn-lg" style="color:#fff;border-color:rgba(255,255,255,0.3);">상담 신청</a>
