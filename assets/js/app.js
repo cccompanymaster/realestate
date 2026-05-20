@@ -353,12 +353,67 @@
               <div class="spec"><div class="l">등록일</div><div class="v">${new Date(item.createdAt || Date.now()).toLocaleDateString('ko-KR')}</div></div>
             </div>
             <div style="display:flex;gap:10px;">
-              <button class="btn btn-primary btn-lg" style="flex:1" onclick="alert('상담 신청이 접수되었습니다.\\n담당자가 곧 연락드립니다.')">상담 신청</button>
+              <button class="btn btn-primary btn-lg" style="flex:1" data-consult>💬 무료 상담 신청</button>
               <button class="btn btn-outline btn-lg" onclick="this.classList.toggle('liked');this.textContent=this.classList.contains('liked')?'♥ 찜한 매물':'♡ 찜하기'">♡ 찜하기</button>
             </div>
           </div>
         </div>
       </div>`;
+  }
+
+  // ---------- bottom CTA: reveal after passing the hero ----------
+  function initBottomCTA() {
+    const cta = document.getElementById('bottom-cta');
+    if (!cta) return;
+
+    const hero = document.querySelector('.hero');
+    function threshold() {
+      // Reveal after the hero is mostly scrolled past, or after 280px elsewhere.
+      if (hero) return hero.offsetHeight * 0.7;
+      return 280;
+    }
+
+    let visible = false;
+    function onScroll() {
+      const shouldShow = window.scrollY > threshold();
+      if (shouldShow === visible) return;
+      visible = shouldShow;
+      cta.classList.toggle('is-visible', shouldShow);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll();
+  }
+
+  // ---------- consult overlay ----------
+  function initConsult() {
+    const overlay = document.getElementById('consult-overlay');
+    if (!overlay) return;
+
+    function open() {
+      overlay.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      overlay.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('[data-consult]').forEach((el) => {
+      el.addEventListener('click', (e) => { e.preventDefault(); open(); });
+    });
+    overlay.querySelectorAll('[data-consult-close]').forEach((el) => {
+      el.addEventListener('click', close);
+    });
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close();
+    });
+
+    // expose globally so inline handlers (e.g., detail page) can call it
+    window.HOMEPICK_openConsult = open;
   }
 
   // ---------- loader ----------
@@ -377,6 +432,8 @@
     initListings();
     initPost();
     initDetail();
+    initBottomCTA();
+    initConsult();
 
     // year in footer
     const y = document.getElementById('year');
