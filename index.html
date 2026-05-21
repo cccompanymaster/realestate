@@ -71,7 +71,12 @@
       <aside class="realtor-card" aria-label="대표 중개사 안내">
         <span class="rc-badge"><span class="star">★</span> 송도 부동산 NO.1</span>
         <div class="rc-head">
-          <div class="rc-photo">김</div>
+          <div class="rc-photo">
+            <span class="initial">김</span>
+            <!-- Profile photo: upload your file to assets/img/profile.jpg.
+                 If the file is missing this <img> removes itself and the "김" initial shows. -->
+            <img src="assets/img/profile.jpg" alt="김재원 대표 프로필" onerror="this.remove()">
+          </div>
           <div>
             <div class="rc-name">김재원 <span class="role">대표</span></div>
             <div class="rc-sub">HOMEPICK 공인중개사 사무소</div>
