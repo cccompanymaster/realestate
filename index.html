@@ -235,11 +235,21 @@
       </div>
       <div class="map-grid">
         <div class="map-frame">
-          <iframe
-            src="https://maps.google.com/maps?q=%EC%9D%B8%EC%B2%9C+%EC%97%B0%EC%88%98%EA%B5%AC+%EC%86%A1%EB%8F%84%EA%B3%BC%ED%95%99%EB%A1%9C+70&t=&z=15&ie=UTF8&iwloc=&output=embed"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="HOMEPICK 본사 위치"></iframe>
+          <!-- Naver Maps mount point -->
+          <div id="naver-map" aria-label="HOMEPICK 본사 위치 지도"></div>
+          <!-- Styled fallback shown until the Naver Maps script authenticates -->
+          <div class="map-placeholder" aria-hidden="true">
+            <div class="map-pin">
+              <span class="pulse"></span>
+              <span class="marker">
+                <svg viewBox="0 0 44 56" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M22 2c-9.94 0-18 7.79-18 17.41 0 13.06 18 34.59 18 34.59s18-21.53 18-34.59C40 9.79 31.94 2 22 2z" fill="#03C75A"/>
+                  <circle cx="22" cy="19.4" r="6.4" fill="#fff"/>
+                </svg>
+              </span>
+              <span class="label">HOMEPICK 본사<span class="km">· 송도에이티센터</span></span>
+            </div>
+          </div>
         </div>
         <div class="map-info">
           <h3>HOMEPICK 본사</h3>
@@ -251,7 +261,7 @@
             <li><span class="lbl">주차</span><span class="v">건물 내 방문주차 가능</span></li>
           </ul>
           <div class="map-actions">
-            <a href="https://map.naver.com/p/search/송도과학로%2070" target="_blank" rel="noopener" class="btn btn-outline">🗺️ 길찾기</a>
+            <a href="https://map.naver.com/p/search/%EC%9D%B8%EC%B2%9C%20%EC%97%B0%EC%88%98%EA%B5%AC%20%EC%86%A1%EB%8F%84%EA%B3%BC%ED%95%99%EB%A1%9C%2070" target="_blank" rel="noopener" class="btn btn-naver">네이버 지도</a>
             <a href="tel:1588-0000" class="btn btn-primary">📞 전화 걸기</a>
           </div>
         </div>
@@ -402,6 +412,66 @@
     </div>
   </div>
 </div>
+
+<!--
+  네이버 지도 (Naver Maps) 연동:
+  1) https://www.ncloud.com 가입 → 콘솔 접속
+  2) AI·Application Service → Maps → Application 등록
+  3) "Web 서비스 URL"에 본 사이트 도메인 추가 (예: cccompanymaster.github.io)
+  4) 발급된 Client ID를 아래 script src의 YOUR_CLIENT_ID 자리에 붙여넣기
+  키 없이도 페이지는 정상 동작하며, 지도 영역에는 폴백 핀이 표시됩니다.
+-->
+<script type="text/javascript"
+  src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=YOUR_CLIENT_ID"
+  onerror="window.__naverMapFailed = true;"></script>
+<script>
+(function () {
+  // HOMEPICK 본사: 인천 연수구 송도과학로 70 (송도에이티센터)
+  var LAT = 37.3833, LNG = 126.6403;
+  var TITLE = 'HOMEPICK 본사';
+
+  function init() {
+    if (typeof naver === 'undefined' || !naver.maps || window.__naverMapFailed) return;
+    var pos = new naver.maps.LatLng(LAT, LNG);
+    var map = new naver.maps.Map('naver-map', {
+      center: pos,
+      zoom: 16,
+      minZoom: 12,
+      zoomControl: true,
+      zoomControlOptions: {
+        position: naver.maps.Position.TOP_RIGHT,
+        style: naver.maps.ZoomControlStyle.SMALL
+      },
+      logoControl: true,
+      mapDataControl: false,
+      scaleControl: false
+    });
+    var marker = new naver.maps.Marker({
+      position: pos,
+      map: map,
+      title: TITLE
+    });
+    var info = new naver.maps.InfoWindow({
+      content: '<div style="padding:10px 14px;font-family:Pretendard,sans-serif;">'
+             + '<strong style="font-size:13px;">' + TITLE + '</strong>'
+             + '<div style="font-size:11px;color:#6B7C8D;margin-top:2px;">송도과학로 70, 154호</div>'
+             + '</div>',
+      borderColor: '#0B1B2B',
+      anchorSize: new naver.maps.Size(10, 10)
+    });
+    info.open(map, marker);
+    naver.maps.Event.addListener(marker, 'click', function () {
+      if (info.getMap()) info.close(); else info.open(map, marker);
+    });
+    // Hide the placeholder once the real map renders
+    var ph = document.querySelector('.map-placeholder');
+    if (ph) ph.style.display = 'none';
+  }
+
+  if (document.readyState === 'complete') init();
+  else window.addEventListener('load', init);
+})();
+</script>
 
 <script src="assets/js/data.js"></script>
 <script src="assets/js/app.js"></script>

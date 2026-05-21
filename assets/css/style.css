@@ -807,13 +807,78 @@ section.hero { padding: 32px 0 40px; }
 .map-frame {
   position: relative;
   aspect-ratio: 16/10;
-  background: linear-gradient(135deg, #E8E8E2, #D4D4CB);
+  background: #EAF1F3;
+  overflow: hidden;
 }
-.map-frame iframe {
+#naver-map {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
-  border: 0;
 }
+/* Empty Naver-map container shows the styled placeholder behind it.
+   Once the API mounts its iframe/canvas, those elements fill it
+   and visually cover the placeholder. */
+.map-placeholder {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background:
+    linear-gradient(135deg, #F2F6F7 0%, #E2EAEE 100%);
+  pointer-events: none;
+}
+.map-placeholder::before,
+.map-placeholder::after {
+  /* grid lines — soft "map" feel */
+  content: ''; position: absolute; inset: 0;
+}
+.map-placeholder::before {
+  background-image:
+    linear-gradient(rgba(11, 27, 43, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(11, 27, 43, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.map-placeholder::after {
+  background:
+    radial-gradient(circle at 30% 40%, rgba(3, 199, 90, 0.08) 0%, transparent 30%),
+    radial-gradient(circle at 70% 60%, rgba(11, 27, 43, 0.06) 0%, transparent 35%);
+}
+.map-pin {
+  position: relative;
+  display: flex; flex-direction: column; align-items: center;
+  z-index: 2;
+}
+.map-pin .pulse {
+  position: absolute;
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: rgba(3, 199, 90, 0.18);
+  animation: mapPulse 2s ease-out infinite;
+  top: -8px;
+}
+.map-pin .pulse::after {
+  content: ''; position: absolute; inset: 0;
+  border-radius: 50%;
+  background: rgba(3, 199, 90, 0.32);
+  animation: mapPulse 2s ease-out 0.6s infinite;
+}
+@keyframes mapPulse {
+  0% { transform: scale(0.3); opacity: 1; }
+  100% { transform: scale(1.2); opacity: 0; }
+}
+.map-pin .marker {
+  width: 44px; height: 56px;
+  position: relative;
+  filter: drop-shadow(0 4px 8px rgba(11, 27, 43, 0.25));
+}
+.map-pin .marker svg { width: 100%; height: 100%; }
+.map-pin .label {
+  margin-top: 10px;
+  background: var(--surface);
+  padding: 8px 14px; border-radius: 999px;
+  font-size: 12.5px; font-weight: 700; color: var(--ink);
+  box-shadow: 0 4px 12px rgba(11, 27, 43, 0.12);
+  white-space: nowrap;
+}
+.map-pin .label .km { color: var(--ink-3); font-weight: 500; margin-left: 6px; }
+
 .map-info { padding: 36px; display: flex; flex-direction: column; }
 .map-info h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 6px; }
 .map-info .map-sub { color: var(--ink-3); font-size: 13.5px; margin-bottom: 24px; }
@@ -832,6 +897,11 @@ section.hero { padding: 32px 0 40px; }
 .map-info li .v { color: var(--ink); line-height: 1.6; }
 .map-info .map-actions { display: flex; gap: 8px; margin-top: auto; }
 .map-info .map-actions .btn { flex: 1; }
+.btn-naver {
+  background: #03C75A; color: #fff;
+  font-weight: 700;
+}
+.btn-naver:hover { background: #02b551; }
 
 /* ===== Footer ===== */
 .site-footer {
