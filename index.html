@@ -349,15 +349,15 @@
       </div>
       <div class="map-grid">
         <div class="map-frame">
-          <!-- Naver Maps mount point -->
-          <div id="naver-map" aria-label="HOMEPICK 본사 위치 지도"></div>
-          <!-- Styled fallback shown until the Naver Maps script authenticates -->
+          <!-- Kakao Map mount point -->
+          <div id="kakao-map" aria-label="HOMEPICK 본사 위치 지도"></div>
+          <!-- Styled fallback shown until the Kakao Map script authenticates -->
           <div class="map-placeholder" aria-hidden="true">
             <div class="map-pin">
               <span class="pulse"></span>
               <span class="marker">
                 <svg viewBox="0 0 44 56" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M22 2c-9.94 0-18 7.79-18 17.41 0 13.06 18 34.59 18 34.59s18-21.53 18-34.59C40 9.79 31.94 2 22 2z" fill="#03C75A"/>
+                  <path d="M22 2c-9.94 0-18 7.79-18 17.41 0 13.06 18 34.59 18 34.59s18-21.53 18-34.59C40 9.79 31.94 2 22 2z" fill="#E97C2A"/>
                   <circle cx="22" cy="19.4" r="6.4" fill="#fff"/>
                 </svg>
               </span>
@@ -375,7 +375,7 @@
             <li><span class="lbl">주차</span><span class="v">건물 내 방문주차 가능</span></li>
           </ul>
           <div class="map-actions">
-            <a href="https://map.naver.com/p/search/%EC%9D%B8%EC%B2%9C%20%EC%97%B0%EC%88%98%EA%B5%AC%20%EC%86%A1%EB%8F%84%EA%B3%BC%ED%95%99%EB%A1%9C%2070" target="_blank" rel="noopener" class="btn btn-naver">네이버 지도</a>
+            <a href="https://map.kakao.com/?q=%EC%9D%B8%EC%B2%9C%20%EC%97%B0%EC%88%98%EA%B5%AC%20%EC%86%A1%EB%8F%84%EA%B3%BC%ED%95%99%EB%A1%9C%2070" target="_blank" rel="noopener" class="btn btn-kakaomap">카카오맵으로 보기</a>
             <a href="tel:1588-0000" class="btn btn-primary">📞 전화 걸기</a>
           </div>
         </div>
@@ -528,16 +528,17 @@
 </div>
 
 <!--
-  네이버 지도 (Naver Maps) 연동:
-  1) https://www.ncloud.com 가입 → 콘솔 접속
-  2) AI·Application Service → Maps → Application 등록
-  3) "Web 서비스 URL"에 본 사이트 도메인 추가 (예: cccompanymaster.github.io)
-  4) 발급된 Client ID를 아래 script src의 YOUR_CLIENT_ID 자리에 붙여넣기
+  카카오맵 (Kakao Map) 연동:
+  1) https://developers.kakao.com 로그인 → "내 애플리케이션" → [애플리케이션 추가하기]
+  2) 만든 앱 클릭 → 좌측 "플랫폼" → "Web 플랫폼 등록"에 사이트 도메인 추가
+     (예: https://cccompanymaster.github.io, http://localhost:8765)
+  3) "앱 키" 탭에서 JavaScript 키 복사
+  4) 아래 script src의 YOUR_KAKAO_KEY 자리에 붙여넣기
   키 없이도 페이지는 정상 동작하며, 지도 영역에는 폴백 핀이 표시됩니다.
 -->
 <script type="text/javascript"
-  src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=YOUR_CLIENT_ID"
-  onerror="window.__naverMapFailed = true;"></script>
+  src="//dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_KAKAO_KEY&autoload=false"
+  onerror="window.__kakaoMapFailed = true;"></script>
 <script>
 (function () {
   // HOMEPICK 본사: 인천 연수구 송도과학로 70 (송도에이티센터)
@@ -545,41 +546,39 @@
   var TITLE = 'HOMEPICK 본사';
 
   function init() {
-    if (typeof naver === 'undefined' || !naver.maps || window.__naverMapFailed) return;
-    var pos = new naver.maps.LatLng(LAT, LNG);
-    var map = new naver.maps.Map('naver-map', {
-      center: pos,
-      zoom: 16,
-      minZoom: 12,
-      zoomControl: true,
-      zoomControlOptions: {
-        position: naver.maps.Position.TOP_RIGHT,
-        style: naver.maps.ZoomControlStyle.SMALL
-      },
-      logoControl: true,
-      mapDataControl: false,
-      scaleControl: false
+    if (typeof kakao === 'undefined' || !kakao.maps || window.__kakaoMapFailed) return;
+    kakao.maps.load(function () {
+      var container = document.getElementById('kakao-map');
+      if (!container) return;
+      var pos = new kakao.maps.LatLng(LAT, LNG);
+      var map = new kakao.maps.Map(container, {
+        center: pos,
+        level: 3  // 1(가장 확대) ~ 14(가장 축소). 3 ≈ 동네 단위
+      });
+      // Zoom & map-type controls in the top-right
+      map.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.TOPRIGHT);
+      map.addControl(new kakao.maps.MapTypeControl(), kakao.maps.ControlPosition.TOPRIGHT);
+
+      var marker = new kakao.maps.Marker({ position: pos, map: map, title: TITLE });
+
+      var info = new kakao.maps.InfoWindow({
+        content:
+          '<div style="padding:10px 14px;font-family:Pretendard,sans-serif;min-width:140px;">' +
+            '<strong style="font-size:13px;color:#0B1B2B;">' + TITLE + '</strong>' +
+            '<div style="font-size:11px;color:#6B7C8D;margin-top:2px;">송도과학로 70, 154호</div>' +
+          '</div>',
+        removable: true
+      });
+      info.open(map, marker);
+
+      kakao.maps.event.addListener(marker, 'click', function () {
+        info.open(map, marker);
+      });
+
+      // Hide the placeholder once the real map renders
+      var ph = document.querySelector('.map-placeholder');
+      if (ph) ph.style.display = 'none';
     });
-    var marker = new naver.maps.Marker({
-      position: pos,
-      map: map,
-      title: TITLE
-    });
-    var info = new naver.maps.InfoWindow({
-      content: '<div style="padding:10px 14px;font-family:Pretendard,sans-serif;">'
-             + '<strong style="font-size:13px;">' + TITLE + '</strong>'
-             + '<div style="font-size:11px;color:#6B7C8D;margin-top:2px;">송도과학로 70, 154호</div>'
-             + '</div>',
-      borderColor: '#0B1B2B',
-      anchorSize: new naver.maps.Size(10, 10)
-    });
-    info.open(map, marker);
-    naver.maps.Event.addListener(marker, 'click', function () {
-      if (info.getMap()) info.close(); else info.open(map, marker);
-    });
-    // Hide the placeholder once the real map renders
-    var ph = document.querySelector('.map-placeholder');
-    if (ph) ph.style.display = 'none';
   }
 
   if (document.readyState === 'complete') init();
