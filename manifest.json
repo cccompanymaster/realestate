@@ -1,0 +1,26 @@
+{
+  "name": "HOMEPICK — 송도 부동산 매물 플랫폼",
+  "short_name": "HOMEPICK",
+  "description": "송도·서울·수도권 매매·임대·분양 매물을 큐레이션하는 부동산 플랫폼",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FAFAF7",
+  "theme_color": "#0B1B2B",
+  "lang": "ko-KR",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "assets/img/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/img/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "maskable"
+    }
+  ]
+}

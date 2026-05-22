@@ -361,6 +361,36 @@
       </div>`;
   }
 
+  // ---------- mobile nav drawer ----------
+  function initMobileNav() {
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.getElementById('mobile-nav');
+    if (!toggle || !nav) return;
+
+    function setOpen(open) {
+      toggle.classList.toggle('is-open', open);
+      nav.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+
+    toggle.addEventListener('click', () => {
+      setOpen(!nav.classList.contains('is-open'));
+    });
+    nav.querySelectorAll('a').forEach((a) => {
+      // Close drawer when navigating; data-consult links also need the drawer
+      // closed before the modal opens so the body scroll lock transfers cleanly.
+      a.addEventListener('click', () => setOpen(false));
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && nav.classList.contains('is-open')) setOpen(false);
+    });
+    // Auto-close if the viewport grows past the breakpoint
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 960 && nav.classList.contains('is-open')) setOpen(false);
+    });
+  }
+
   // ---------- realtor carousel ----------
   function initRealtorCarousel() {
     const carousel = document.getElementById('realtor-carousel');
@@ -491,6 +521,7 @@
 
   // ---------- boot ----------
   document.addEventListener('DOMContentLoaded', () => {
+    initMobileNav();
     initIndex();
     initListings();
     initPost();

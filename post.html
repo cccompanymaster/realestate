@@ -7,6 +7,9 @@
 <title>매물 등록 — HOMEPICK</title>
 <link rel="stylesheet" href="assets/css/style.css" />
 <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+<link rel="manifest" href="manifest.json" />
+<link rel="apple-touch-icon" href="assets/img/favicon.svg" />
+
 </head>
 <body class="is-loading">
 
@@ -36,8 +39,25 @@
       <a href="listings.html" class="btn btn-ghost">매물 찾기</a>
       <a href="#" class="btn btn-primary" data-consult>💬 상담 신청</a>
     </div>
+      <button class="nav-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
   </div>
 </header>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="모바일 메뉴" hidden>
+    <a href="index.html">홈</a>
+    <a href="listings.html?type=sale">매매</a>
+    <a href="listings.html?type=rent">임대</a>
+    <a href="listings.html?type=presale">분양</a>
+    <a href="listings.html">전체 매물</a>
+    <a href="#" class="mn-cta" data-consult>💬 무료 상담 신청</a>
+    <div class="mn-meta">
+      HOMEPICK 공인중개사 사무소<br/>
+      인천 연수구 송도과학로 70, 154호<br/>
+      1588-0000
+    </div>
+  </nav>
+
 
 <main>
 

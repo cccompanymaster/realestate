@@ -8,6 +8,9 @@
 <meta name="description" content="HOMEPICK은 매매·임대·분양 오피스 매물을 큐레이션하는 부동산 플랫폼입니다." />
 <link rel="stylesheet" href="assets/css/style.css" />
 <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+<link rel="manifest" href="manifest.json" />
+<link rel="apple-touch-icon" href="assets/img/favicon.svg" />
+
 </head>
 <body class="is-loading">
 
@@ -37,8 +40,25 @@
       <a href="listings.html" class="btn btn-ghost">매물 찾기</a>
       <a href="#" class="btn btn-primary" data-consult>💬 상담 신청</a>
     </div>
+      <button class="nav-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
   </div>
 </header>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="모바일 메뉴" hidden>
+    <a href="index.html" style="background:var(--line-2);color:var(--ink);">홈</a>
+    <a href="listings.html?type=sale">매매</a>
+    <a href="listings.html?type=rent">임대</a>
+    <a href="listings.html?type=presale">분양</a>
+    <a href="listings.html">전체 매물</a>
+    <a href="#" class="mn-cta" data-consult>💬 무료 상담 신청</a>
+    <div class="mn-meta">
+      HOMEPICK 공인중개사 사무소<br/>
+      인천 연수구 송도과학로 70, 154호<br/>
+      1588-0000
+    </div>
+  </nav>
+
 
 <main>
 
@@ -227,7 +247,7 @@
       </div>
       <div class="feature-grid">
         <a class="feature-card" href="detail.html?id=seed-5">
-          <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80&auto=format&fit=crop" alt="송도 IBD 시그니처타워" loading="lazy"/>
+          <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=480&q=80&auto=format&fit=crop 480w, https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=80&auto=format&fit=crop 1200w" sizes="(max-width: 640px) 92vw, (max-width: 960px) 33vw, 25vw" alt="송도 IBD 시그니처타워" loading="lazy" decoding="async"/>
           <span class="fc-tag">분양 · 한정수량</span>
           <span class="fc-num">01</span>
           <div class="fc-body">
@@ -240,7 +260,7 @@
           </div>
         </a>
         <a class="feature-card" href="detail.html?id=seed-1">
-          <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80&auto=format&fit=crop" alt="성수동 신축 오피스" loading="lazy"/>
+          <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=480&q=80&auto=format&fit=crop 480w, https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&q=80&auto=format&fit=crop 1200w" sizes="(max-width: 640px) 92vw, (max-width: 960px) 33vw, 25vw" alt="성수동 신축 오피스" loading="lazy" decoding="async"/>
           <span class="fc-tag">매매 · 신축</span>
           <span class="fc-num">02</span>
           <div class="fc-body">
@@ -253,7 +273,7 @@
           </div>
         </a>
         <a class="feature-card" href="detail.html?id=seed-2">
-          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80&auto=format&fit=crop" alt="판교 디지털센터" loading="lazy"/>
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1497366216548-37526070297c?w=480&q=80&auto=format&fit=crop 480w, https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&auto=format&fit=crop 1200w" sizes="(max-width: 640px) 92vw, (max-width: 960px) 33vw, 25vw" alt="판교 디지털센터" loading="lazy" decoding="async"/>
           <span class="fc-tag">임대 · 즉시입주</span>
           <span class="fc-num">03</span>
           <div class="fc-body">

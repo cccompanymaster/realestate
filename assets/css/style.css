@@ -35,6 +35,9 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* Removes default iOS/Android tap highlight; :active gives feedback instead */
+* { -webkit-tap-highlight-color: transparent; }
+
 html, body {
   background: var(--bg);
   color: var(--ink);
@@ -152,6 +155,76 @@ input, select, textarea { font-family: inherit; font-size: inherit; color: inher
 .nav a.active { background: var(--ink); color: #fff; }
 
 .header-cta { display: flex; align-items: center; gap: 10px; }
+
+/* Mobile hamburger toggle (hidden on desktop) */
+.nav-toggle {
+  display: none;
+  width: 44px; height: 44px;
+  flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 5px;
+  border-radius: 12px;
+  transition: background .15s ease;
+}
+.nav-toggle:active { background: var(--line-2); }
+.nav-toggle span {
+  display: block;
+  width: 22px; height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: transform .25s ease, opacity .15s ease;
+}
+.nav-toggle.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.is-open span:nth-child(2) { opacity: 0; }
+.nav-toggle.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile drawer */
+.mobile-nav[hidden] { display: flex; } /* override the HTML5 hidden attribute */
+.mobile-nav {
+  position: fixed;
+  top: 64px; left: 0; right: 0; bottom: 0;
+  background: var(--bg);
+  padding: 24px 24px calc(40px + env(safe-area-inset-bottom, 0px));
+  z-index: 95;
+  display: flex; flex-direction: column; gap: 6px;
+  transform: translateY(-100%);
+  opacity: 0; visibility: hidden;
+  transition: transform .3s cubic-bezier(.2,.7,.2,1), opacity .25s ease, visibility 0s linear .3s;
+  overflow-y: auto;
+}
+.mobile-nav.is-open {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  transition: transform .3s cubic-bezier(.2,.7,.2,1), opacity .2s ease;
+}
+.mobile-nav a {
+  padding: 16px 18px;
+  border-radius: 14px;
+  font-size: 16px; font-weight: 600;
+  color: var(--ink); letter-spacing: -0.005em;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+}
+.mobile-nav a:last-of-type { border-bottom: 0; }
+.mobile-nav a:active { background: var(--line-2); }
+.mobile-nav a::after { content: '→'; color: var(--ink-3); font-size: 16px; }
+.mobile-nav .mn-cta {
+  margin-top: 18px;
+  background: var(--ink); color: #fff;
+  justify-content: center;
+  border: 0;
+  font-size: 15px;
+}
+.mobile-nav .mn-cta:active { background: #1c3047; }
+.mobile-nav .mn-cta::after { content: ''; }
+.mobile-nav .mn-meta {
+  margin-top: auto;
+  padding-top: 24px;
+  color: var(--ink-3);
+  font-size: 12.5px; line-height: 1.7;
+  text-align: center;
+}
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   padding: 11px 22px; border-radius: 999px;
@@ -1213,7 +1286,9 @@ section.hero { padding: 32px 0 40px; }
   .form-card { padding: 36px; }
   .form-section { margin-bottom: 40px; }
   .nav { display: none; }
+  .nav-toggle { display: flex; }
   .header-cta .btn-ghost { display: none; }
+  .header-cta .btn-primary { display: none; }
 
   .float-channels { right: 14px; gap: 10px; }
   .float-channels .ch { width: 48px; height: 48px; }
@@ -1306,7 +1381,8 @@ section.hero { padding: 32px 0 40px; }
   .feature-grid::-webkit-scrollbar { display: none; }
   .feature-card { scroll-snap-align: start; aspect-ratio: 4/5; }
 
-  /* REALTOR carousel on mobile */
+  /* REALTOR carousel on mobile — show 8% peek of the next card */
+  .realtor-card { flex: 0 0 92%; }
   .realtor-card .rc-photo-banner { aspect-ratio: 4/5; }
   .realtor-card .rc-photo-banner .initial { font-size: 84px; }
   .realtor-card .rc-name-overlay { padding: 16px 18px 18px; }
@@ -1446,6 +1522,37 @@ section.hero { padding: 32px 0 40px; }
   .consult-opt .ic { width: 44px; height: 44px; }
 
 }
+
+/* ===== Touch-device adjustments ===== */
+@media (hover: none) and (pointer: coarse) {
+  /* Disable sticky hover effects (they get stuck after tap) */
+  .btn-primary:hover { background: var(--ink); transform: none; box-shadow: none; }
+  .btn-accent:hover { background: var(--accent); }
+  .btn-outline:hover { border-color: var(--line); }
+  .btn-ghost:hover { background: transparent; color: var(--ink-2); }
+  .listing-card:hover { transform: none; box-shadow: none; border-color: var(--line); }
+  .listing-card:hover .listing-thumb img { transform: none; }
+  .feature-card:hover { transform: none; }
+  .feature-card:hover img { transform: none; }
+  .cat-tile:hover { transform: none; box-shadow: none; border-color: var(--line); }
+  .float-channels .ch:hover {
+    transform: none;
+    box-shadow: 0 4px 14px rgba(11, 27, 43, 0.18);
+  }
+  .float-channels .ch:hover .tip { opacity: 0; }
+  .rc-nav:hover { background: rgba(255, 255, 255, 0.96); transform: translateY(-50%); }
+  .nav a:hover { background: transparent; color: var(--ink-2); }
+  .chip:hover { border-color: var(--line); }
+}
+
+/* Universal active-state feedback (works on both touch + click) */
+.btn:active { transform: scale(0.97); }
+.listing-card:active, .feature-card:active, .cat-tile:active { transform: scale(0.985); }
+.chip:active { background: var(--line-2); }
+.float-channels .ch:active { transform: scale(0.94); }
+
+/* Horizontal carousels: don't bounce the page when reaching the edge */
+.rc-track, .feature-grid { overscroll-behavior-x: contain; }
 
 /* ===== Small phones ===== */
 @media (max-width: 380px) {
