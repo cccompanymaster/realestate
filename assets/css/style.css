@@ -633,109 +633,128 @@ section.hero { padding: 32px 0 40px; }
 .consult-opt.tel .ic { background: var(--accent-soft); color: var(--accent); }
 .consult-opt.mail .ic { background: #E7F0FB; color: var(--blue); }
 
-/* ===== Realtor card (hero sidebar) ===== */
+/* ===== Realtor carousel ===== */
+.realtor-carousel {
+  position: relative;
+}
+.rc-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  gap: 16px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  /* Allow lift-on-hover to not get clipped vertically */
+  padding: 8px 4px;
+  margin: -8px -4px 0;
+}
+.rc-track::-webkit-scrollbar { display: none; }
+
+/* ===== Realtor card (carousel item) ===== */
 .realtor-card {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  padding: 36px 32px 32px;
   box-shadow: var(--shadow-lg);
   position: relative;
   overflow: hidden;
-  text-align: left;
+  display: flex; flex-direction: column;
 }
-.realtor-card .rc-header {
-  text-align: center;
-  padding-bottom: 24px;
-  margin-bottom: 22px;
-  border-bottom: 1px solid var(--line);
+
+/* Photo as full-width banner at the top */
+.realtor-card .rc-photo-banner {
   position: relative;
+  aspect-ratio: 4/5;
+  background: linear-gradient(135deg, #1F3550 0%, #0B1B2B 100%);
+  overflow: hidden;
 }
-.realtor-card::before {
-  content: ''; position: absolute;
-  top: -80px; left: 50%; transform: translateX(-50%);
-  width: 260px; height: 260px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(233, 124, 42, 0.10), transparent 70%);
-  pointer-events: none;
-}
-.realtor-card .rc-photo {
-  width: 148px; height: 148px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #0B1B2B 0%, #1E3550 100%);
-  margin: 0 auto 24px;
-  display: grid; place-items: center;
-  font-weight: 800; color: #fff; font-size: 44px;
-  letter-spacing: -0.02em;
-  box-shadow:
-    0 18px 36px rgba(11, 27, 43, 0.22),
-    0 0 0 5px #fff,
-    0 0 0 7px rgba(233, 124, 42, 0.32);
-  position: relative;
-}
-.realtor-card .rc-photo .initial { z-index: 0; position: relative; }
-.realtor-card .rc-photo img {
+.realtor-card .rc-photo-banner img {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
-  border-radius: 50%;
   object-fit: cover;
-  object-position: center 28%;
-  z-index: 1;
+  object-position: center 22%;
 }
-.realtor-card .rc-photo .verified {
-  position: absolute;
-  bottom: 4px; right: 4px;
-  width: 36px; height: 36px; border-radius: 50%;
-  background: #03C75A; color: #fff;
+.realtor-card .rc-photo-banner .initial {
+  position: absolute; inset: 0;
   display: grid; place-items: center;
-  font-size: 16px; font-weight: 900; line-height: 1;
-  border: 3px solid #fff;
-  z-index: 3;
-  box-shadow: 0 4px 10px rgba(3, 199, 90, 0.4);
+  font-weight: 800; font-size: 96px;
+  color: rgba(255, 255, 255, 0.94);
+  letter-spacing: -0.03em;
+  z-index: 0;
+}
+.realtor-card .rc-photo-banner::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0;
+  height: 50%;
+  background: linear-gradient(to top, rgba(11, 27, 43, 0.85) 0%, rgba(11, 27, 43, 0.0) 100%);
+  z-index: 1; pointer-events: none;
 }
 .realtor-card .rc-badge {
+  position: absolute; top: 16px; left: 16px;
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 6px 14px; border-radius: 999px;
-  background: var(--ink); color: #fff;
-  font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+  padding: 6px 12px; border-radius: 999px;
+  background: rgba(255, 255, 255, 0.96); color: var(--ink);
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: 14px;
-  position: relative;
+  backdrop-filter: blur(8px);
+  z-index: 2;
 }
 .realtor-card .rc-badge .star { color: var(--accent); }
-.realtor-card .rc-name-block {
-  margin-bottom: 26px;
-  position: relative;
+.realtor-card .rc-photo-banner .verified {
+  position: absolute; top: 16px; right: 16px;
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 6px 10px 6px 8px; border-radius: 999px;
+  background: #03C75A; color: #fff;
+  font-size: 11px; font-weight: 800; letter-spacing: 0.02em;
+  z-index: 2;
+  box-shadow: 0 4px 10px rgba(3, 199, 90, 0.35);
+}
+.realtor-card .rc-photo-banner .verified::before {
+  content: '✓'; font-weight: 900;
+}
+.realtor-card .rc-name-overlay {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 18px 22px 20px;
+  color: #fff; z-index: 2;
 }
 .realtor-card .rc-name {
   font-size: 24px; font-weight: 800; letter-spacing: -0.02em;
   line-height: 1.2;
 }
-.realtor-card .rc-name .role { color: var(--accent); font-size: 15px; font-weight: 700; margin-left: 6px; }
-.realtor-card .rc-sub { font-size: 13.5px; color: var(--ink-3); margin-top: 6px; }
+.realtor-card .rc-name .role {
+  color: var(--accent); font-size: 15px; font-weight: 700; margin-left: 6px;
+}
+.realtor-card .rc-sub {
+  font-size: 13px; color: rgba(255, 255, 255, 0.78);
+  margin-top: 4px;
+}
+
+/* Card body */
+.realtor-card .rc-body {
+  padding: 22px 24px 24px;
+  display: flex; flex-direction: column;
+  flex: 1;
+}
 .realtor-card .rc-meta {
-  list-style: none; padding: 0;
+  list-style: none; padding: 0; margin: 0 0 18px;
   display: flex; flex-direction: column; gap: 8px;
-  margin-bottom: 22px;
   font-size: 13px; color: var(--ink-2);
-  position: relative;
 }
 .realtor-card .rc-meta li { display: flex; align-items: center; gap: 10px; }
 .realtor-card .rc-meta .ic {
-  width: 24px; height: 24px;
-  display: grid; place-items: center;
+  width: 24px; height: 24px; border-radius: 6px;
   background: var(--bg); color: var(--ink-3);
-  border-radius: 6px; font-size: 12px;
-  flex-shrink: 0;
+  display: grid; place-items: center;
+  font-size: 12px; flex-shrink: 0;
 }
 .realtor-card .rc-stats {
   display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  padding: 20px 0;
+  gap: 12px; padding: 18px 0;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  margin-bottom: 20px;
-  position: relative;
+  margin-bottom: 18px;
 }
 .realtor-card .rc-stat { text-align: center; }
 .realtor-card .rc-stat strong {
@@ -749,13 +768,53 @@ section.hero { padding: 32px 0 40px; }
   color: var(--ink-3); font-size: 11.5px;
   display: block; margin-top: 4px; letter-spacing: 0.02em;
 }
-.realtor-card .rc-actions { display: flex; gap: 8px; position: relative; }
+.realtor-card .rc-actions { display: flex; gap: 8px; margin-top: auto; }
 .realtor-card .rc-actions .btn { flex: 1; padding: 12px 14px; font-size: 13.5px; }
-.btn-kakao {
-  background: #FEE500; color: #371D1E;
-  font-weight: 700;
-}
+.btn-kakao { background: #FEE500; color: #371D1E; font-weight: 700; }
 .btn-kakao:hover { background: #f4d800; }
+
+/* Carousel nav buttons */
+.rc-nav {
+  position: absolute;
+  top: 30%; transform: translateY(-50%);
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.96); color: var(--ink);
+  display: grid; place-items: center;
+  font-size: 22px; font-weight: 700; line-height: 1;
+  box-shadow: 0 6px 18px rgba(11, 27, 43, 0.18);
+  z-index: 5; cursor: pointer;
+  transition: all .15s ease;
+  backdrop-filter: blur(8px);
+}
+.rc-nav:hover { background: #fff; transform: translateY(-50%) scale(1.05); }
+.rc-nav.prev { left: -16px; }
+.rc-nav.next { right: -16px; }
+.rc-nav[disabled] { opacity: 0.35; cursor: not-allowed; }
+.rc-nav[disabled]:hover { transform: translateY(-50%); }
+
+/* Dot indicators + counter */
+.rc-controls {
+  display: flex; align-items: center; justify-content: center;
+  gap: 18px; margin-top: 20px;
+}
+.rc-dots { display: flex; gap: 8px; align-items: center; }
+.rc-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--line);
+  border: 0; padding: 0; cursor: pointer;
+  transition: all .2s ease;
+}
+.rc-dot:hover { background: var(--ink-3); }
+.rc-dot.active {
+  background: var(--ink);
+  width: 24px; border-radius: 999px;
+}
+.rc-counter {
+  font-family: var(--font-serif); font-style: italic;
+  color: var(--ink-3); font-size: 14px; font-weight: 500;
+  min-width: 48px; text-align: center;
+}
+.rc-counter strong { color: var(--ink); font-weight: 600; }
 
 /* ===== Featured property highlight cards (above-the-fold) ===== */
 .feature-strip { padding: 64px 0 32px; }
@@ -1242,15 +1301,19 @@ section.hero { padding: 32px 0 40px; }
   .feature-grid::-webkit-scrollbar { display: none; }
   .feature-card { scroll-snap-align: start; aspect-ratio: 4/5; }
 
-  /* REALTOR card on mobile */
-  .realtor-card { padding: 28px 22px 24px; }
-  .realtor-card .rc-photo { width: 124px; height: 124px; font-size: 36px; }
-  .realtor-card .rc-photo .verified { width: 30px; height: 30px; font-size: 13px; }
-  .realtor-card .rc-header { padding-bottom: 22px; margin-bottom: 20px; }
+  /* REALTOR carousel on mobile */
+  .realtor-card .rc-photo-banner { aspect-ratio: 4/5; }
+  .realtor-card .rc-photo-banner .initial { font-size: 84px; }
+  .realtor-card .rc-name-overlay { padding: 16px 18px 18px; }
   .realtor-card .rc-name { font-size: 22px; }
   .realtor-card .rc-name .role { font-size: 14px; }
-  .realtor-card .rc-stats { padding: 18px 0; gap: 8px; }
+  .realtor-card .rc-body { padding: 20px 20px 22px; }
+  .realtor-card .rc-stats { padding: 16px 0; gap: 8px; margin-bottom: 16px; }
   .realtor-card .rc-stat strong { font-size: 20px; }
+  .rc-nav { width: 40px; height: 40px; font-size: 20px; }
+  .rc-nav.prev { left: 6px; }
+  .rc-nav.next { right: 6px; }
+  .rc-controls { gap: 14px; margin-top: 16px; }
 
   /* MAP */
   .map-grid { gap: 0; }

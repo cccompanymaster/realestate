@@ -68,34 +68,144 @@
         </div>
       </div>
 
-      <aside class="realtor-card" aria-label="대표 중개사 안내">
-        <header class="rc-header">
-          <div class="rc-photo">
-            <span class="initial">김</span>
-            <img src="assets/img/profile.jpg" alt="김재원 대표 프로필" onerror="this.remove()">
-            <span class="verified" title="공인중개사 검증 완료" aria-label="공인중개사 검증 완료">✓</span>
-          </div>
-          <span class="rc-badge"><span class="star">★</span> 송도 부동산 NO.1</span>
-          <div class="rc-name-block">
-            <div class="rc-name">김재원 <span class="role">대표</span></div>
-            <div class="rc-sub">HOMEPICK 공인중개사 사무소</div>
-          </div>
-        </header>
-        <ul class="rc-meta">
-          <li><span class="ic">📍</span><span>인천 연수구 송도과학로 70, 154호</span></li>
-          <li><span class="ic">📋</span><span>등록번호 28185-2026-00001</span></li>
-          <li><span class="ic">📞</span><span>1588-0000 · 평일 09–18시</span></li>
-        </ul>
-        <div class="rc-stats">
-          <div class="rc-stat"><strong>20<span class="serif">+</span></strong><span>년 경력</span></div>
-          <div class="rc-stat"><strong>1,200<span class="serif">+</span></strong><span>거래 성사</span></div>
-          <div class="rc-stat"><strong>4.9</strong><span>고객 만족</span></div>
+      <div class="realtor-carousel" id="realtor-carousel" aria-label="대표 중개사 팀">
+        <button class="rc-nav prev" type="button" aria-label="이전 카드">‹</button>
+        <button class="rc-nav next" type="button" aria-label="다음 카드">›</button>
+
+        <div class="rc-track">
+
+          <!-- 1. 김재원 대표 -->
+          <article class="realtor-card">
+            <div class="rc-photo-banner">
+              <span class="initial">김</span>
+              <img src="assets/img/profile.jpg" alt="김재원 대표 프로필" onerror="this.remove()">
+              <span class="rc-badge"><span class="star">★</span> 송도 NO.1</span>
+              <span class="verified" aria-label="공인중개사 검증 완료">공인중개사</span>
+              <div class="rc-name-overlay">
+                <div class="rc-name">김재원 <span class="role">대표</span></div>
+                <div class="rc-sub">매매·임대·분양 종합 컨설팅</div>
+              </div>
+            </div>
+            <div class="rc-body">
+              <ul class="rc-meta">
+                <li><span class="ic">📍</span><span>인천 연수구 송도과학로 70, 154호</span></li>
+                <li><span class="ic">📋</span><span>등록번호 28185-2026-00001</span></li>
+                <li><span class="ic">📞</span><span>1588-0000</span></li>
+              </ul>
+              <div class="rc-stats">
+                <div class="rc-stat"><strong>20<span class="serif">+</span></strong><span>년 경력</span></div>
+                <div class="rc-stat"><strong>1,200<span class="serif">+</span></strong><span>거래 성사</span></div>
+                <div class="rc-stat"><strong>4.9</strong><span>고객 만족</span></div>
+              </div>
+              <div class="rc-actions">
+                <a href="#" class="btn btn-kakao">💬 카톡 상담</a>
+                <a href="#" class="btn btn-primary" data-consult>1:1 상담</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 2. 이서연 실장 -->
+          <article class="realtor-card">
+            <div class="rc-photo-banner">
+              <span class="initial">이</span>
+              <img src="assets/img/profile-2.jpg" alt="이서연 실장 프로필" onerror="this.remove()">
+              <span class="rc-badge"><span class="star">★</span> 매매 전문</span>
+              <span class="verified" aria-label="공인중개사 검증 완료">공인중개사</span>
+              <div class="rc-name-overlay">
+                <div class="rc-name">이서연 <span class="role">실장</span></div>
+                <div class="rc-sub">송도·청라 오피스 매매 전문</div>
+              </div>
+            </div>
+            <div class="rc-body">
+              <ul class="rc-meta">
+                <li><span class="ic">📍</span><span>인천 연수구 송도과학로 70, 154호</span></li>
+                <li><span class="ic">📋</span><span>등록번호 28185-2026-00002</span></li>
+                <li><span class="ic">📞</span><span>1588-0000 (내선 102)</span></li>
+              </ul>
+              <div class="rc-stats">
+                <div class="rc-stat"><strong>10<span class="serif">+</span></strong><span>년 경력</span></div>
+                <div class="rc-stat"><strong>850<span class="serif">+</span></strong><span>거래 성사</span></div>
+                <div class="rc-stat"><strong>4.8</strong><span>고객 만족</span></div>
+              </div>
+              <div class="rc-actions">
+                <a href="#" class="btn btn-kakao">💬 카톡 상담</a>
+                <a href="#" class="btn btn-primary" data-consult>1:1 상담</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 3. 박민준 부장 -->
+          <article class="realtor-card">
+            <div class="rc-photo-banner">
+              <span class="initial">박</span>
+              <img src="assets/img/profile-3.jpg" alt="박민준 부장 프로필" onerror="this.remove()">
+              <span class="rc-badge"><span class="star">★</span> 임대 전문</span>
+              <span class="verified" aria-label="공인중개사 검증 완료">공인중개사</span>
+              <div class="rc-name-overlay">
+                <div class="rc-name">박민준 <span class="role">부장</span></div>
+                <div class="rc-sub">사옥 임대·관리 컨설팅 전문</div>
+              </div>
+            </div>
+            <div class="rc-body">
+              <ul class="rc-meta">
+                <li><span class="ic">📍</span><span>인천 연수구 송도과학로 70, 154호</span></li>
+                <li><span class="ic">📋</span><span>등록번호 28185-2026-00003</span></li>
+                <li><span class="ic">📞</span><span>1588-0000 (내선 103)</span></li>
+              </ul>
+              <div class="rc-stats">
+                <div class="rc-stat"><strong>15<span class="serif">+</span></strong><span>년 경력</span></div>
+                <div class="rc-stat"><strong>1,050<span class="serif">+</span></strong><span>거래 성사</span></div>
+                <div class="rc-stat"><strong>4.9</strong><span>고객 만족</span></div>
+              </div>
+              <div class="rc-actions">
+                <a href="#" class="btn btn-kakao">💬 카톡 상담</a>
+                <a href="#" class="btn btn-primary" data-consult>1:1 상담</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 4. 최지호 과장 -->
+          <article class="realtor-card">
+            <div class="rc-photo-banner">
+              <span class="initial">최</span>
+              <img src="assets/img/profile-4.jpg" alt="최지호 과장 프로필" onerror="this.remove()">
+              <span class="rc-badge"><span class="star">★</span> 분양 전문</span>
+              <span class="verified" aria-label="공인중개사 검증 완료">공인중개사</span>
+              <div class="rc-name-overlay">
+                <div class="rc-name">최지호 <span class="role">과장</span></div>
+                <div class="rc-sub">신축 오피스·지식산업센터 분양</div>
+              </div>
+            </div>
+            <div class="rc-body">
+              <ul class="rc-meta">
+                <li><span class="ic">📍</span><span>인천 연수구 송도과학로 70, 154호</span></li>
+                <li><span class="ic">📋</span><span>등록번호 28185-2026-00004</span></li>
+                <li><span class="ic">📞</span><span>1588-0000 (내선 104)</span></li>
+              </ul>
+              <div class="rc-stats">
+                <div class="rc-stat"><strong>8<span class="serif">+</span></strong><span>년 경력</span></div>
+                <div class="rc-stat"><strong>620<span class="serif">+</span></strong><span>거래 성사</span></div>
+                <div class="rc-stat"><strong>4.7</strong><span>고객 만족</span></div>
+              </div>
+              <div class="rc-actions">
+                <a href="#" class="btn btn-kakao">💬 카톡 상담</a>
+                <a href="#" class="btn btn-primary" data-consult>1:1 상담</a>
+              </div>
+            </div>
+          </article>
+
         </div>
-        <div class="rc-actions">
-          <a href="#" class="btn btn-kakao">💬 카톡 상담</a>
-          <a href="#" class="btn btn-primary" data-consult>1:1 상담 신청</a>
+
+        <div class="rc-controls">
+          <div class="rc-dots" role="tablist">
+            <button class="rc-dot active" type="button" data-idx="0" aria-label="1번째 중개사"></button>
+            <button class="rc-dot" type="button" data-idx="1" aria-label="2번째 중개사"></button>
+            <button class="rc-dot" type="button" data-idx="2" aria-label="3번째 중개사"></button>
+            <button class="rc-dot" type="button" data-idx="3" aria-label="4번째 중개사"></button>
+          </div>
+          <div class="rc-counter"><strong>01</strong> <span style="opacity:.5">/ 04</span></div>
         </div>
-      </aside>
+      </div>
     </div>
 
     <div class="hero-scroll" aria-hidden="true">

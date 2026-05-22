@@ -361,6 +361,69 @@
       </div>`;
   }
 
+  // ---------- realtor carousel ----------
+  function initRealtorCarousel() {
+    const carousel = document.getElementById('realtor-carousel');
+    if (!carousel) return;
+
+    const track = carousel.querySelector('.rc-track');
+    const cards = track.querySelectorAll('.realtor-card');
+    const dots = carousel.querySelectorAll('.rc-dot');
+    const counter = carousel.querySelector('.rc-counter strong');
+    const prevBtn = carousel.querySelector('.rc-nav.prev');
+    const nextBtn = carousel.querySelector('.rc-nav.next');
+    const total = cards.length;
+    if (!total) return;
+
+    let currentIdx = 0;
+
+    function scrollToCard(idx) {
+      const target = cards[idx];
+      if (!target) return;
+      const left = target.offsetLeft - cards[0].offsetLeft;
+      track.scrollTo({ left, behavior: 'smooth' });
+    }
+
+    function setActive(idx) {
+      idx = Math.max(0, Math.min(total - 1, idx));
+      currentIdx = idx;
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      if (counter) counter.textContent = String(idx + 1).padStart(2, '0');
+      if (prevBtn) prevBtn.toggleAttribute('disabled', idx === 0);
+      if (nextBtn) nextBtn.toggleAttribute('disabled', idx === total - 1);
+    }
+
+    function goTo(idx) {
+      idx = Math.max(0, Math.min(total - 1, idx));
+      scrollToCard(idx);
+      setActive(idx);
+    }
+
+    prevBtn && prevBtn.addEventListener('click', () => goTo(currentIdx - 1));
+    nextBtn && nextBtn.addEventListener('click', () => goTo(currentIdx + 1));
+    dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+
+    // Keep dots/counter in sync when the user swipes/drags manually
+    let scrollTm;
+    track.addEventListener('scroll', () => {
+      clearTimeout(scrollTm);
+      scrollTm = setTimeout(() => {
+        const cardWidth = cards[0].getBoundingClientRect().width;
+        const gap = parseFloat(getComputedStyle(track).columnGap || '16') || 16;
+        const idx = Math.round(track.scrollLeft / (cardWidth + gap));
+        if (idx !== currentIdx) setActive(idx);
+      }, 80);
+    }, { passive: true });
+
+    // Keyboard nav when the carousel area has focus
+    carousel.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(currentIdx - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); goTo(currentIdx + 1); }
+    });
+
+    setActive(0);
+  }
+
   // ---------- bottom CTA: reveal after passing the hero ----------
   function initBottomCTA() {
     const cta = document.getElementById('bottom-cta');
@@ -432,6 +495,7 @@
     initListings();
     initPost();
     initDetail();
+    initRealtorCarousel();
     initBottomCTA();
     initConsult();
 
