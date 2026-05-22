@@ -172,10 +172,10 @@ input, select, textarea { font-family: inherit; font-size: inherit; color: inher
 /* ===== Hero ===== */
 .hero {
   position: relative;
-  /* Slightly less than viewport so the feature strip peeks above fold */
-  min-height: calc(86vh - 80px);
+  /* Grow with content so the realtor carousel fits without scroll */
+  min-height: 0;
   display: flex; align-items: center;
-  padding: 48px 0 56px;
+  padding: 40px 0 56px;
 }
 .hero-grid {
   display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 64px;
@@ -667,7 +667,7 @@ section.hero { padding: 32px 0 40px; }
 /* Photo as full-width banner at the top */
 .realtor-card .rc-photo-banner {
   position: relative;
-  aspect-ratio: 4/5;
+  aspect-ratio: 4/3;
   background: linear-gradient(135deg, #1F3550 0%, #0B1B2B 100%);
   overflow: hidden;
 }
@@ -675,12 +675,12 @@ section.hero { padding: 32px 0 40px; }
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
-  object-position: center 22%;
+  object-position: center 35%;
 }
 .realtor-card .rc-photo-banner .initial {
   position: absolute; inset: 0;
   display: grid; place-items: center;
-  font-weight: 800; font-size: 96px;
+  font-weight: 800; font-size: 72px;
   color: rgba(255, 255, 255, 0.94);
   letter-spacing: -0.03em;
   z-index: 0;
@@ -716,90 +716,90 @@ section.hero { padding: 32px 0 40px; }
 }
 .realtor-card .rc-name-overlay {
   position: absolute; left: 0; right: 0; bottom: 0;
-  padding: 18px 22px 20px;
+  padding: 14px 20px 16px;
   color: #fff; z-index: 2;
 }
 .realtor-card .rc-name {
-  font-size: 24px; font-weight: 800; letter-spacing: -0.02em;
+  font-size: 21px; font-weight: 800; letter-spacing: -0.02em;
   line-height: 1.2;
 }
 .realtor-card .rc-name .role {
-  color: var(--accent); font-size: 15px; font-weight: 700; margin-left: 6px;
+  color: var(--accent); font-size: 14px; font-weight: 700; margin-left: 5px;
 }
 .realtor-card .rc-sub {
-  font-size: 13px; color: rgba(255, 255, 255, 0.78);
-  margin-top: 4px;
+  font-size: 12.5px; color: rgba(255, 255, 255, 0.78);
+  margin-top: 3px;
 }
 
 /* Card body */
 .realtor-card .rc-body {
-  padding: 22px 24px 24px;
+  padding: 16px 20px 18px;
   display: flex; flex-direction: column;
   flex: 1;
 }
 .realtor-card .rc-meta {
-  list-style: none; padding: 0; margin: 0 0 18px;
-  display: flex; flex-direction: column; gap: 8px;
-  font-size: 13px; color: var(--ink-2);
+  list-style: none; padding: 0; margin: 0 0 14px;
+  display: flex; flex-direction: column; gap: 6px;
+  font-size: 12.5px; color: var(--ink-2);
 }
 .realtor-card .rc-meta li { display: flex; align-items: center; gap: 10px; }
 .realtor-card .rc-meta .ic {
-  width: 24px; height: 24px; border-radius: 6px;
+  width: 22px; height: 22px; border-radius: 6px;
   background: var(--bg); color: var(--ink-3);
   display: grid; place-items: center;
-  font-size: 12px; flex-shrink: 0;
+  font-size: 11px; flex-shrink: 0;
 }
 .realtor-card .rc-stats {
   display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 12px; padding: 18px 0;
+  gap: 8px; padding: 12px 0;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 .realtor-card .rc-stat { text-align: center; }
 .realtor-card .rc-stat strong {
-  display: block; font-size: 22px; font-weight: 800;
+  display: block; font-size: 18px; font-weight: 800;
   letter-spacing: -0.02em; line-height: 1.1;
 }
 .realtor-card .rc-stat .serif {
   font-family: var(--font-serif); font-style: italic; color: var(--accent); font-weight: 500;
 }
 .realtor-card .rc-stat span {
-  color: var(--ink-3); font-size: 11.5px;
-  display: block; margin-top: 4px; letter-spacing: 0.02em;
+  color: var(--ink-3); font-size: 11px;
+  display: block; margin-top: 2px; letter-spacing: 0.02em;
 }
 .realtor-card .rc-actions { display: flex; gap: 8px; margin-top: auto; }
-.realtor-card .rc-actions .btn { flex: 1; padding: 12px 14px; font-size: 13.5px; }
+.realtor-card .rc-actions .btn { flex: 1; padding: 10px 14px; font-size: 13px; min-height: 40px; }
 .btn-kakao { background: #FEE500; color: #371D1E; font-weight: 700; }
 .btn-kakao:hover { background: #f4d800; }
 
 /* Carousel nav buttons */
 .rc-nav {
   position: absolute;
-  top: 30%; transform: translateY(-50%);
-  width: 44px; height: 44px; border-radius: 50%;
+  top: 28%; transform: translateY(-50%);
+  width: 40px; height: 40px; border-radius: 50%;
   background: rgba(255, 255, 255, 0.96); color: var(--ink);
   display: grid; place-items: center;
-  font-size: 22px; font-weight: 700; line-height: 1;
+  font-size: 20px; font-weight: 700; line-height: 1;
   box-shadow: 0 6px 18px rgba(11, 27, 43, 0.18);
   z-index: 5; cursor: pointer;
   transition: all .15s ease;
   backdrop-filter: blur(8px);
 }
 .rc-nav:hover { background: #fff; transform: translateY(-50%) scale(1.05); }
-.rc-nav.prev { left: -16px; }
-.rc-nav.next { right: -16px; }
+.rc-nav.prev { left: 10px; }
+.rc-nav.next { right: 10px; }
 .rc-nav[disabled] { opacity: 0.35; cursor: not-allowed; }
 .rc-nav[disabled]:hover { transform: translateY(-50%); }
 
 /* Dot indicators + counter */
 .rc-controls {
   display: flex; align-items: center; justify-content: center;
-  gap: 18px; margin-top: 20px;
+  gap: 16px; margin-top: 14px;
 }
-.rc-dots { display: flex; gap: 8px; align-items: center; }
+.rc-dots { display: flex; gap: 7px; align-items: center; }
 .rc-dot {
-  width: 8px; height: 8px; border-radius: 50%;
+  width: 7px; height: 7px; border-radius: 50%;
   background: var(--line);
   border: 0; padding: 0; cursor: pointer;
   transition: all .2s ease;
@@ -807,12 +807,12 @@ section.hero { padding: 32px 0 40px; }
 .rc-dot:hover { background: var(--ink-3); }
 .rc-dot.active {
   background: var(--ink);
-  width: 24px; border-radius: 999px;
+  width: 20px; border-radius: 999px;
 }
 .rc-counter {
   font-family: var(--font-serif); font-style: italic;
-  color: var(--ink-3); font-size: 14px; font-weight: 500;
-  min-width: 48px; text-align: center;
+  color: var(--ink-3); font-size: 13px; font-weight: 500;
+  min-width: 44px; text-align: center;
 }
 .rc-counter strong { color: var(--ink); font-weight: 600; }
 
