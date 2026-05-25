@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="ko">
 <head>
+<script>(function(){try{var t=localStorage.getItem('homepick.theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0B1B2B" />
@@ -36,6 +38,10 @@
       <a href="listings.html">전체 매물</a>
     </nav>
     <div class="header-cta">
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="다크 모드 전환">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
       <a href="listings.html" class="btn btn-ghost">매물 찾기</a>
       <a href="#" class="btn btn-primary" data-consult>💬 상담 신청</a>
     </div>
@@ -102,14 +108,14 @@
           <div class="form-row full">
             <div class="field">
               <label>매물 제목 <span class="req">*</span></label>
-              <input type="text" name="title" required maxlength="60" placeholder="예) 강남 테헤란로 신축 오피스 매매" />
+              <input type="text" name="title" required maxlength="60" enterkeyhint="next" placeholder="예) 강남 테헤란로 신축 오피스 매매" />
               <div class="hint">최대 60자. 입지·특징을 한 줄로 표현해 주세요.</div>
             </div>
           </div>
           <div class="form-row">
             <div class="field">
               <label>주소 / 위치 <span class="req">*</span></label>
-              <input type="text" name="location" required placeholder="예) 서울 강남구 역삼동" />
+              <input type="text" name="location" required autocomplete="address-level2" enterkeyhint="next" placeholder="예) 서울 강남구 역삼동" />
             </div>
             <div class="field">
               <label>빌딩명</label>
@@ -123,11 +129,11 @@
           <div class="form-row">
             <div class="field">
               <label>전용 면적 (㎡)</label>
-              <input type="number" name="area_exclusive" min="0" step="0.01" placeholder="예) 82.5" />
+              <input type="number" name="area_exclusive" min="0" step="0.01" inputmode="decimal" placeholder="예) 82.5" />
             </div>
             <div class="field">
               <label>계약 면적 (㎡)</label>
-              <input type="number" name="area_contract" min="0" step="0.01" placeholder="예) 165" />
+              <input type="number" name="area_contract" min="0" step="0.01" inputmode="decimal" placeholder="예) 165" />
             </div>
           </div>
           <div class="form-row">
@@ -148,7 +154,7 @@
             </div>
             <div class="field">
               <label>준공 (입주) 연도</label>
-              <input type="text" name="built" placeholder="예) 2024" />
+              <input type="text" name="built" inputmode="numeric" maxlength="4" placeholder="예) 2024" />
             </div>
           </div>
         </div>

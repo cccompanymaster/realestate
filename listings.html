@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="ko">
 <head>
+<script>(function(){try{var t=localStorage.getItem('homepick.theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0B1B2B" />
@@ -36,6 +38,10 @@
       <a href="listings.html" class="active">전체 매물</a>
     </nav>
     <div class="header-cta">
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="다크 모드 전환">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
       <a href="#" class="btn btn-primary" data-consult>💬 상담 신청</a>
     </div>
       <button class="nav-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-nav">
@@ -71,19 +77,22 @@
   <section style="padding-top:0;">
     <div class="container">
 
-      <form class="search-card" style="margin-bottom:28px;" onsubmit="event.preventDefault()">
-        <div class="search-tabs">
-          <button type="button" class="active">전체</button>
-        </div>
-        <input id="list-q" class="search-input" type="text" placeholder="지역·빌딩명으로 검색" />
-        <button type="button" class="btn btn-primary">검색</button>
-      </form>
+      <div class="list-filterbar">
+        <form class="search-card" onsubmit="event.preventDefault()">
+          <div class="search-tabs">
+            <button type="button" class="active">전체</button>
+          </div>
+          <input id="list-q" class="search-input" type="search" inputmode="search"
+                 enterkeyhint="search" autocomplete="off" placeholder="지역·빌딩명으로 검색" />
+          <button type="button" class="btn btn-primary">검색</button>
+        </form>
 
-      <div class="filters">
-        <button class="chip" data-filter="all">전체</button>
-        <button class="chip" data-filter="sale">매매</button>
-        <button class="chip" data-filter="rent">임대</button>
-        <button class="chip" data-filter="presale">분양</button>
+        <div class="filters">
+          <button class="chip" data-filter="all">전체</button>
+          <button class="chip" data-filter="sale">매매</button>
+          <button class="chip" data-filter="rent">임대</button>
+          <button class="chip" data-filter="presale">분양</button>
+        </div>
       </div>
 
       <div class="listing-grid" id="listings-grid"></div>

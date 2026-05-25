@@ -322,18 +322,30 @@
 
     const typeLabel = TYPE_LABEL[item.type] || '매물';
     const images = (item.images && item.images.length) ? item.images : (item.image ? [item.image] : []);
-    const mainImg = images[0] || '';
-    const thumbs = images.slice(1, 5);
+    const multi = images.length > 1;
+
+    const slidesHtml = images.length
+      ? images.map((src, i) =>
+          `<div class="dg-slide"><img src="${escapeHtml(src)}" alt="${escapeHtml(item.title)} 사진 ${i + 1}" ${i === 0 ? '' : 'loading="lazy"'}/></div>`
+        ).join('')
+      : '<div class="dg-slide dg-empty">사진 준비 중</div>';
+
+    const galleryHtml = `
+      <div class="detail-gallery-wrap">
+        <div class="detail-gallery" id="detail-gallery">${slidesHtml}</div>
+        ${multi ? `<div class="dg-counter"><strong>1</strong> / ${images.length}</div>` : ''}
+        ${multi ? '<button class="dg-nav prev" type="button" aria-label="이전 사진">‹</button><button class="dg-nav next" type="button" aria-label="다음 사진">›</button>' : ''}
+      </div>
+      ${multi ? `<div class="detail-thumbs">${images.map((t, i) =>
+        `<button class="t${i === 0 ? ' active' : ''}" type="button" data-go="${i}"><img src="${escapeHtml(t)}" alt="" loading="lazy"/></button>`
+      ).join('')}</div>` : ''}`;
 
     root.innerHTML = `
       <div class="detail-hero">
         <div class="crumb"><a href="index.html">HOMEPICK</a> / <a href="listings.html">매물</a> / ${escapeHtml(typeLabel)}</div>
         <div class="detail-grid">
           <div>
-            <div class="detail-gallery">
-              ${mainImg ? `<img src="${escapeHtml(mainImg)}" alt="${escapeHtml(item.title)}"/>` : ''}
-            </div>
-            ${thumbs.length ? `<div class="detail-thumbs">${thumbs.map(t => `<div class="t"><img src="${escapeHtml(t)}" alt=""/></div>`).join('')}</div>` : ''}
+            ${galleryHtml}
             <div class="detail-desc">${escapeHtml(item.description || '상세 설명이 곧 추가됩니다.')}</div>
           </div>
           <div class="detail-info">
@@ -359,6 +371,79 @@
           </div>
         </div>
       </div>`;
+
+    initDetailGallery();
+  }
+
+  // ---------- detail gallery (swipe + thumbs) ----------
+  function initDetailGallery() {
+    const gallery = document.getElementById('detail-gallery');
+    if (!gallery) return;
+    const slides = gallery.querySelectorAll('.dg-slide');
+    if (slides.length < 2) return;
+
+    const wrap = gallery.closest('.detail-gallery-wrap');
+    const counter = wrap && wrap.querySelector('.dg-counter strong');
+    const prev = wrap && wrap.querySelector('.dg-nav.prev');
+    const next = wrap && wrap.querySelector('.dg-nav.next');
+    const thumbs = wrap && wrap.parentElement.querySelectorAll('.detail-thumbs .t');
+    let idx = 0;
+
+    function goTo(i) {
+      i = Math.max(0, Math.min(slides.length - 1, i));
+      gallery.scrollTo({ left: slides[i].offsetLeft - slides[0].offsetLeft, behavior: 'smooth' });
+      setActive(i);
+    }
+    function setActive(i) {
+      idx = i;
+      if (counter) counter.textContent = String(i + 1);
+      if (thumbs) thumbs.forEach((t, ti) => t.classList.toggle('active', ti === i));
+      if (prev) prev.toggleAttribute('disabled', i === 0);
+      if (next) next.toggleAttribute('disabled', i === slides.length - 1);
+    }
+
+    prev && prev.addEventListener('click', () => goTo(idx - 1));
+    next && next.addEventListener('click', () => goTo(idx + 1));
+    thumbs && thumbs.forEach((t) => t.addEventListener('click', () => goTo(+t.dataset.go)));
+
+    let tm;
+    gallery.addEventListener('scroll', () => {
+      clearTimeout(tm);
+      tm = setTimeout(() => {
+        const w = slides[0].getBoundingClientRect().width;
+        const i = Math.round(gallery.scrollLeft / w);
+        if (i !== idx) setActive(i);
+      }, 80);
+    }, { passive: true });
+
+    setActive(0);
+  }
+
+  // ---------- theme toggle (light / dark) ----------
+  function initTheme() {
+    const root = document.documentElement;
+    const meta = document.querySelector('meta[name="theme-color"]');
+
+    function apply(theme) {
+      root.setAttribute('data-theme', theme);
+      if (meta) meta.setAttribute('content', theme === 'dark' ? '#0F151B' : '#0B1B2B');
+      try { localStorage.setItem('homepick.theme', theme); } catch (e) {}
+    }
+
+    document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        apply(next);
+      });
+    });
+
+    // Follow OS changes only when the user hasn't explicitly chosen
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    mq.addEventListener && mq.addEventListener('change', (e) => {
+      let stored = null;
+      try { stored = localStorage.getItem('homepick.theme'); } catch (err) {}
+      if (!stored) root.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+    });
   }
 
   // ---------- mobile nav drawer ----------
@@ -521,6 +606,7 @@
 
   // ---------- boot ----------
   document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
     initMobileNav();
     initIndex();
     initListings();
