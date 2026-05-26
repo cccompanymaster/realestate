@@ -328,6 +328,26 @@ input, select, textarea { font-family: inherit; font-size: inherit; color: inher
   font-weight: 500;
   color: var(--accent);
 }
+/* Typewriter word in the hero title */
+.hero h1 .typed-word {
+  color: var(--accent);
+  white-space: nowrap;
+}
+.hero h1 .typed-word::after {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 0.82em;
+  background: var(--accent);
+  margin-left: 4px;
+  border-radius: 2px;
+  vertical-align: -0.06em;
+  animation: caretBlink 1s steps(1) infinite;
+}
+@keyframes caretBlink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .hero h1 .typed-word::after { animation: none; }
+}
 .hero-sub {
   font-size: clamp(15px, 1.3vw, 18px);
   line-height: 1.75;

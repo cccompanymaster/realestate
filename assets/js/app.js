@@ -419,6 +419,40 @@
     setActive(0);
   }
 
+  // ---------- hero title typewriter ----------
+  function initTypewriter() {
+    const el = document.getElementById('typed-word');
+    if (!el) return;
+    const words = ['사무실', '아파트', '건물', '전세', '월세'];
+
+    // Respect reduced-motion: cycle words without the typing animation
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      let i = 0;
+      el.textContent = words[0];
+      setInterval(() => { i = (i + 1) % words.length; el.textContent = words[i]; }, 2200);
+      return;
+    }
+
+    const TYPE = 120, ERASE = 60, HOLD = 1500, GAP = 350;
+    let wi = 0, ci = 0, deleting = false;
+
+    function tick() {
+      const word = words[wi];
+      if (!deleting) {
+        ci++;
+        el.textContent = word.slice(0, ci);
+        if (ci === word.length) { deleting = true; setTimeout(tick, HOLD); return; }
+        setTimeout(tick, TYPE);
+      } else {
+        ci--;
+        el.textContent = word.slice(0, ci);
+        if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; setTimeout(tick, GAP); return; }
+        setTimeout(tick, ERASE);
+      }
+    }
+    setTimeout(tick, HOLD); // start after holding the first word a beat
+  }
+
   // ---------- theme toggle (light / dark) ----------
   function initTheme() {
     const root = document.documentElement;
@@ -514,9 +548,22 @@
       setActive(idx);
     }
 
-    prevBtn && prevBtn.addEventListener('click', () => goTo(currentIdx - 1));
-    nextBtn && nextBtn.addEventListener('click', () => goTo(currentIdx + 1));
-    dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+    // ----- auto-rotate -----
+    const AUTO_MS = 4000;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let autoTimer = null;
+    function startAuto() {
+      if (reduceMotion) return;
+      stopAuto();
+      autoTimer = setInterval(() => goTo((currentIdx + 1) % total), AUTO_MS);
+    }
+    function stopAuto() { if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } }
+    // Restart the timer after any manual move so it doesn't jump immediately
+    function restartAuto() { if (!reduceMotion) startAuto(); }
+
+    prevBtn && prevBtn.addEventListener('click', () => { goTo(currentIdx - 1); restartAuto(); });
+    nextBtn && nextBtn.addEventListener('click', () => { goTo(currentIdx + 1); restartAuto(); });
+    dots.forEach((d, i) => d.addEventListener('click', () => { goTo(i); restartAuto(); }));
 
     // Keep dots/counter in sync when the user swipes/drags manually
     let scrollTm;
@@ -532,11 +579,22 @@
 
     // Keyboard nav when the carousel area has focus
     carousel.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(currentIdx - 1); }
-      if (e.key === 'ArrowRight') { e.preventDefault(); goTo(currentIdx + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(currentIdx - 1); restartAuto(); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); goTo(currentIdx + 1); restartAuto(); }
+    });
+
+    // Pause while the user is hovering / touching, resume after
+    carousel.addEventListener('mouseenter', stopAuto);
+    carousel.addEventListener('mouseleave', startAuto);
+    carousel.addEventListener('touchstart', stopAuto, { passive: true });
+    carousel.addEventListener('touchend', restartAuto, { passive: true });
+    // Pause when the tab is hidden (saves cycles, avoids surprise jumps)
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stopAuto(); else startAuto();
     });
 
     setActive(0);
+    startAuto();
   }
 
   // ---------- bottom CTA: reveal after passing the hero ----------
@@ -608,6 +666,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initMobileNav();
+    initTypewriter();
     initIndex();
     initListings();
     initPost();
