@@ -1612,36 +1612,39 @@ section.hero { padding: 32px 0 40px; }
   .btn { min-height: 46px; padding: 13px 22px; font-size: 14px; }
   .btn-lg { min-height: 54px; padding: 16px 28px; font-size: 15px; }
 
-  /* FLOATING channels — pill row above bottom CTA */
+  /* FLOATING channels — vertical stack on the right, PC-style.
+     Anchored just above the bottom CTA so they never overlap it. */
   .float-channels {
     top: auto;
-    bottom: calc(90px + env(safe-area-inset-bottom, 0px));
-    transform: none; flex-direction: row;
-    right: 16px; gap: 10px;
+    bottom: calc(92px + env(safe-area-inset-bottom, 0px));
+    transform: none;
+    flex-direction: column;
+    right: 12px; gap: 9px;
   }
   .float-channels .ch {
     width: 46px; height: 46px;
-    box-shadow: 0 4px 14px rgba(11, 27, 43, 0.18);
+    box-shadow: 0 4px 14px rgba(11, 27, 43, 0.2);
   }
   .float-channels .ch svg { width: 20px; height: 20px; }
   .ch-blog .blog-mark { font-size: 12px; }
 
-  /* BOTTOM CTA — full-width compact bar */
+  /* BOTTOM CTA — centered compact pill, PC-style */
   .bottom-cta {
-    left: 16px; right: 16px;
+    left: 50%; right: auto;
     bottom: calc(16px + env(safe-area-inset-bottom, 0px));
-    transform: translateY(220%);
-    padding: 12px 14px 12px 18px;
-    border-radius: 18px;
-    max-width: none;
+    transform: translateX(-50%) translateY(240%);
+    padding: 8px 8px 8px 18px;
+    border-radius: 999px;
+    width: max-content;
+    max-width: calc(100vw - 32px);
     gap: 12px;
   }
-  .bottom-cta.is-visible { transform: translateY(0); }
-  .bottom-cta .bc-text { flex: 1; }
-  .bottom-cta .bc-text strong { font-size: 13.5px; }
+  .bottom-cta.is-visible { transform: translateX(-50%) translateY(0); }
+  .bottom-cta .bc-text { flex: 0 1 auto; }
+  .bottom-cta .bc-text strong { font-size: 13px; }
   .bottom-cta .bc-text span { display: none; }
   .bottom-cta .bc-tel { display: none; }
-  .bottom-cta .bc-cta { padding: 11px 18px; font-size: 13.5px; }
+  .bottom-cta .bc-cta { padding: 11px 18px; font-size: 13px; white-space: nowrap; }
 
   /* CONSULT modal */
   .consult-panel { padding: 28px 22px; border-radius: 18px; }
