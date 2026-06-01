@@ -38,6 +38,15 @@
       <a href="listings.html?type=presale">분양</a>
       <a href="listings.html">전체 매물</a>
     </nav>
+    <div class="header-sns" aria-label="소셜 채널">
+      <a href="#" aria-label="유튜브 채널" title="유튜브">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.25 5 12 5 12 5s-6.25 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.76 1.77C5.75 19 12 19 12 19s6.25 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3-5.2 3z"/></svg>
+      </a>
+      <a href="#" aria-label="인스타그램" title="인스타그램">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+      </a>
+      <a href="#" aria-label="네이버 블로그" title="블로그"><span class="sns-blog">blog</span></a>
+    </div>
     <div class="header-cta">
       <button class="theme-toggle" type="button" data-theme-toggle aria-label="다크 모드 전환">
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -86,6 +95,12 @@
           <input id="hero-q" class="search-input" type="text" placeholder="지역·빌딩명·역세권으로 검색해 보세요" />
           <button type="submit" class="btn btn-accent">검색</button>
         </form>
+
+        <button type="button" class="ai-cta" data-ai-open>
+          <span class="ai-spark">✨</span>
+          AI가 추천하는 맞춤 매물 받기
+          <span class="ai-tag">NEW</span>
+        </button>
 
         <div class="hero-stats">
           <div class="hero-stat"><strong id="stat-total">1,240</strong><span>실시간 매물</span></div>
@@ -363,6 +378,140 @@
     </div>
   </section>
 
+  <!-- TESTIMONIALS — 고객 후기 -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <span class="hero-eyebrow"><span class="dot"></span> Reviews</span>
+          <h2 style="margin-top:14px;">고객이 직접 남긴 <span class="serif">후기</span></h2>
+          <p class="lead">계약 종료 후 실제 거래 고객님들이 남겨주신 평가입니다.</p>
+        </div>
+      </div>
+      <div class="testimonial-grid">
+        <article class="testimonial reveal">
+          <div class="stars">★★★★★</div>
+          <p class="quote">송도 사무실 알아보면서 여러 부동산 다녀봤는데, 김재원 대표님이 시세부터 계약·임대인 협상까지 꼼꼼하게 챙겨주셔서 안심하고 진행했습니다. 강추!</p>
+          <div class="t-author">
+            <div class="avatar">박</div>
+            <div>
+              <strong>박OO 대표</strong>
+              <span>IT 스타트업 · 매매 거래</span>
+            </div>
+          </div>
+        </article>
+        <article class="testimonial reveal">
+          <div class="stars">★★★★★</div>
+          <p class="quote">법인 사옥 매입 건으로 의뢰드렸는데 매물 비교표를 직접 만들어 주셔서 의사결정이 빨랐어요. 잔금까지 한 달 만에 마무리됐습니다.</p>
+          <div class="t-author">
+            <div class="avatar">이</div>
+            <div>
+              <strong>이OO 이사</strong>
+              <span>제조업 법인 · 사옥 매입</span>
+            </div>
+          </div>
+        </article>
+        <article class="testimonial reveal">
+          <div class="stars">★★★★★</div>
+          <p class="quote">처음 임대 알아볼 때 헤매다가 카톡 채널로 문의 드렸는데 30분 만에 후보 4곳을 보내주셨어요. 다음 날 바로 보러 갔고 일주일 안에 계약 완료.</p>
+          <div class="t-author">
+            <div class="avatar">최</div>
+            <div>
+              <strong>최OO 대표</strong>
+              <span>디자인 에이전시 · 임대 거래</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ CATEGORIES — 자주 받는 문의 -->
+  <section>
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <span class="hero-eyebrow"><span class="dot"></span> FAQ</span>
+          <h2 style="margin-top:14px;">자주 받는 <span class="serif">문의</span></h2>
+          <p class="lead">송도에서 가장 많이 받는 6가지 질문을 카테고리로 정리했습니다.</p>
+        </div>
+      </div>
+      <div class="faq-grid">
+        <a href="#" class="faq-card reveal" data-consult>
+          <div class="faq-icon">🏢</div>
+          <h3>송도 신축 사무실 분양</h3>
+          <p>시세·일정·동·평형까지 한눈에 정리해 드립니다.</p>
+          <span class="faq-link">자세히 보기 →</span>
+        </a>
+        <a href="#" class="faq-card reveal" data-consult>
+          <div class="faq-icon">💼</div>
+          <h3>법인 사옥 매입 절차</h3>
+          <p>법인등기·취득세·금융까지 통합 컨설팅이 가능합니다.</p>
+          <span class="faq-link">자세히 보기 →</span>
+        </a>
+        <a href="#" class="faq-card reveal" data-consult>
+          <div class="faq-icon">📐</div>
+          <h3>평형별 적정 임대료</h3>
+          <p>송도 평균 시세 대비 적정 임대료를 비교 분석해 드립니다.</p>
+          <span class="faq-link">자세히 보기 →</span>
+        </a>
+        <a href="#" class="faq-card reveal" data-consult>
+          <div class="faq-icon">🔑</div>
+          <h3>임대 계약 협상</h3>
+          <p>보증금·렌트프리·관리비까지 최대한 유리하게 조율해 드립니다.</p>
+          <span class="faq-link">자세히 보기 →</span>
+        </a>
+        <a href="#" class="faq-card reveal" data-consult>
+          <div class="faq-icon">📊</div>
+          <h3>오피스 투자 수익률</h3>
+          <p>매매가·임대료·관리비 기반 실질 수익률을 산출해 드립니다.</p>
+          <span class="faq-link">자세히 보기 →</span>
+        </a>
+        <a href="#" class="faq-card reveal" data-consult>
+          <div class="faq-icon">🏛️</div>
+          <h3>지식산업센터 분양</h3>
+          <p>업종 제한·취득세 감면까지 사전에 체크해 드립니다.</p>
+          <span class="faq-link">자세히 보기 →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFFICE GALLERY — 사무실 둘러보기 -->
+  <section class="office-gallery">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <span class="hero-eyebrow"><span class="dot"></span> Our Office</span>
+          <h2 style="margin-top:14px;">HOMEPICK <span class="serif">사무실</span></h2>
+          <p class="lead">직접 방문해서 매물 자료와 1:1 상담을 받아보세요.</p>
+        </div>
+      </div>
+      <div class="og-grid">
+        <div class="og-item span-2v reveal">
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=70&auto=format&fit=crop" alt="HOMEPICK 사무실 메인 응접실" loading="lazy"/>
+          <span class="og-caption">메인 응접실</span>
+        </div>
+        <div class="og-item reveal">
+          <img src="https://images.unsplash.com/photo-1497215842964-222b430dc094?w=600&q=70&auto=format&fit=crop" alt="회의실" loading="lazy"/>
+          <span class="og-caption">회의실</span>
+        </div>
+        <div class="og-item reveal">
+          <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=600&q=70&auto=format&fit=crop" alt="상담 코너" loading="lazy"/>
+          <span class="og-caption">1:1 상담실</span>
+        </div>
+        <div class="og-item span-2 reveal">
+          <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1200&q=70&auto=format&fit=crop" alt="매물 자료 라이브러리" loading="lazy"/>
+          <span class="og-caption">매물 자료 라이브러리</span>
+        </div>
+        <div class="og-item reveal">
+          <img src="https://images.unsplash.com/photo-1604328698692-f76ea9498e76?w=600&q=70&auto=format&fit=crop" alt="대표실" loading="lazy"/>
+          <span class="og-caption">대표실</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- MAP — 오시는 길 -->
   <section class="map-section" id="map">
     <div class="container">
@@ -525,6 +674,27 @@
   </div>
   <a href="tel:1588-0000" class="bc-tel">📞 1588-0000</a>
   <a href="#" class="bc-cta" data-consult>무료 상담 →</a>
+</div>
+
+<!-- AI 매물 추천 overlay -->
+<div class="ai-overlay" id="ai-overlay" role="dialog" aria-modal="true" aria-labelledby="ai-title">
+  <div class="ai-panel">
+    <button class="ai-close" type="button" data-ai-close aria-label="닫기">✕</button>
+    <span class="ai-badge">✨ BETA</span>
+    <h3 id="ai-title">AI <span class="serif">매물 추천</span></h3>
+    <p class="ai-lead">송도 시세·면적·예산을 학습한 AI가<br/>가장 적합한 매물 3선을 추천해 드립니다.</p>
+    <div class="ai-chat" id="ai-chat">
+      <div class="ai-msg ai-bot">어떤 공간이 필요하신가요?</div>
+      <div class="ai-chips" id="ai-chips">
+        <button type="button" data-ai-pick="매매">매매</button>
+        <button type="button" data-ai-pick="임대">임대</button>
+        <button type="button" data-ai-pick="분양">분양</button>
+        <button type="button" data-ai-pick="투자">투자용</button>
+      </div>
+    </div>
+    <p class="ai-note">💡 AI 추천 엔진은 학습 중입니다. 정식 출시 전까지 전문 컨설턴트가 동일한 기준으로 직접 매칭해 드립니다.</p>
+    <button class="btn btn-primary btn-lg ai-final-cta" type="button" data-consult>💬 전문가에게 추천받기</button>
+  </div>
 </div>
 
 <!-- Consultation overlay -->

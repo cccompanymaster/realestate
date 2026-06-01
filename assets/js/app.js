@@ -621,6 +621,77 @@
     onScroll();
   }
 
+  // ---------- reveal on scroll ----------
+  function initReveal() {
+    const targets = document.querySelectorAll('.reveal');
+    if (!targets.length) return;
+    if (!('IntersectionObserver' in window) ||
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      targets.forEach((el) => el.classList.add('is-in'));
+      return;
+    }
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-in');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    targets.forEach((el) => obs.observe(el));
+  }
+
+  // ---------- AI overlay ----------
+  function initAI() {
+    const overlay = document.getElementById('ai-overlay');
+    if (!overlay) return;
+    const chat = overlay.querySelector('#ai-chat');
+    const chips = overlay.querySelector('#ai-chips');
+
+    function open() {
+      overlay.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      overlay.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('[data-ai-open]').forEach((el) => {
+      el.addEventListener('click', (e) => { e.preventDefault(); open(); });
+    });
+    overlay.querySelectorAll('[data-ai-close]').forEach((el) => el.addEventListener('click', close));
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('is-open')) close();
+    });
+
+    // Chip pick → echo user message + AI typing + response (mocked)
+    if (chips) {
+      chips.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-ai-pick]');
+        if (!btn || btn.classList.contains('selected')) return;
+        chips.querySelectorAll('button').forEach((b) => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        const pick = btn.dataset.aiPick;
+        // append user echo + typing
+        const userMsg = document.createElement('div');
+        userMsg.className = 'ai-msg ai-user';
+        userMsg.textContent = pick;
+        chat.appendChild(userMsg);
+        const typing = document.createElement('div');
+        typing.className = 'ai-msg ai-bot';
+        typing.innerHTML = '<span class="ai-typing"><span></span><span></span><span></span></span>';
+        chat.appendChild(typing);
+        chat.scrollTop = chat.scrollHeight;
+        setTimeout(() => {
+          typing.innerHTML = `${pick} 매물 기준으로 송도 핵심 3건을 추렸어요.<br/>아래 버튼으로 전문가의 큐레이션을 받아보세요.`;
+          chat.scrollTop = chat.scrollHeight;
+        }, 1200);
+      });
+    }
+  }
+
   // ---------- consult overlay ----------
   function initConsult() {
     const overlay = document.getElementById('consult-overlay');
@@ -674,6 +745,8 @@
     initRealtorCarousel();
     initBottomCTA();
     initConsult();
+    initAI();
+    initReveal();
 
     // year in footer
     const y = document.getElementById('year');
