@@ -739,12 +739,10 @@
     render('sale');
   }
 
-  // ---------- floating side widget (매매/매도 문의) ----------
+  // ---------- right-side panel — chip selection ----------
   function initSideWidget() {
     const widget = document.getElementById('side-widget');
     if (!widget) return;
-    const toggle = widget.querySelector('.sw-toggle');
-    toggle && toggle.addEventListener('click', () => widget.classList.toggle('is-open'));
     widget.querySelectorAll('.sw-chip').forEach((chip) => {
       chip.addEventListener('click', () => chip.classList.toggle('selected'));
     });

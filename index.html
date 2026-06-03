@@ -829,43 +829,91 @@
   </div>
 </div>
 
-<!-- Floating right widget (매매/매도 문의) -->
-<aside class="side-widget" id="side-widget" aria-label="매수/매도 문의 위젯">
-  <button class="sw-toggle" type="button" aria-label="문의 위젯 열기">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
-  </button>
-  <div class="sw-body">
-    <div class="sw-head">매수 / 매도 문의</div>
-    <div class="sw-lead">궁금하신 점이 있으시면<br/>언제든 연락주세요.</div>
-    <div class="sw-tel">📞 1588-0000</div>
-    <div class="sw-actions">
-      <a href="listings.html" class="btn btn-accent">매물 목록</a>
-      <a href="#map" class="btn btn-primary">지도 매물</a>
+<!-- Right-side panel — 매수/매도 문의 + 매물 필터 (날개형) -->
+<aside class="side-widget" id="side-widget" aria-label="매수/매도 문의 패널">
+
+  <!-- TOP: 문의 CTA -->
+  <section class="sw-card sw-cta">
+    <h3>매수 / 매도 문의</h3>
+    <p class="sw-cta-sub">궁금하신 점이 있으시면 언제든 연락주세요.</p>
+    <a href="tel:1588-0000" class="sw-tel"><span class="ic">📞</span> 1588-0000</a>
+    <div class="sw-cta-actions">
+      <a href="listings.html" class="btn-list">매물목록보기</a>
+      <a href="#map" class="btn-map">지도매물보기</a>
     </div>
-    <div class="sw-section-title">📍 매물 필터</div>
-    <div class="sw-row">
-      <select aria-label="지역 시/도"><option>::: 시/도 :::</option><option>인천</option><option>서울</option><option>경기</option></select>
+  </section>
+
+  <!-- 매물 필터 -->
+  <section class="sw-card sw-filter">
+    <h4>매물 필터</h4>
+
+    <div class="sw-group">
+      <label><span class="ic">📍</span> 지역 선택</label>
+      <div class="sw-row"><select><option>::: 시/도 :::</option><option>인천</option><option>서울</option><option>경기</option></select></div>
+      <div class="sw-row"><select><option>::: 구/군 :::</option><option>연수구</option><option>강남구</option><option>분당구</option></select></div>
+      <div class="sw-row"><select><option>::: 동 :::</option><option>송도동</option><option>역삼동</option></select></div>
     </div>
-    <div class="sw-row">
-      <select aria-label="지역 구/군"><option>::: 구/군 :::</option><option>연수구</option><option>강남구</option></select>
+
+    <div class="sw-group">
+      <label><span class="ic">🏷️</span> 거래 유형</label>
+      <div class="sw-chips">
+        <button type="button" class="sw-chip">매매</button>
+        <button type="button" class="sw-chip">전세</button>
+        <button type="button" class="sw-chip">월세</button>
+        <button type="button" class="sw-chip">분양</button>
+        <button type="button" class="sw-chip">교환</button>
+        <button type="button" class="sw-chip">경매</button>
+      </div>
     </div>
-    <div class="sw-row">
-      <select aria-label="지역 동"><option>::: 동 :::</option><option>송도동</option><option>역삼동</option></select>
+
+    <div class="sw-group">
+      <label><span class="ic">🏢</span> 매물 종류</label>
+      <div class="sw-row"><select><option>::: 매물종류 :::</option><option>오피스</option><option>지식산업센터</option><option>상가</option><option>사옥</option></select></div>
     </div>
-    <div class="sw-section-title">🏷️ 거래 유형</div>
-    <div class="sw-chips">
-      <button type="button" class="sw-chip">매매</button>
-      <button type="button" class="sw-chip">전세</button>
-      <button type="button" class="sw-chip">월세</button>
-      <button type="button" class="sw-chip">분양</button>
-      <button type="button" class="sw-chip">교환</button>
+
+    <div class="sw-group">
+      <label><span class="ic">💰</span> 가격 범위</label>
+      <div class="sw-row"><select><option>가격 전체</option><option>1억 미만</option><option>1억–5억</option><option>5억–10억</option><option>10억 이상</option></select></div>
     </div>
-    <div class="sw-section-title">🏢 매물 종류</div>
-    <div class="sw-row">
-      <select aria-label="매물 종류"><option>::: 매물종류 :::</option><option>오피스</option><option>지식산업센터</option><option>상가</option><option>사옥</option></select>
+
+    <div class="sw-group">
+      <label><span class="ic">📐</span> 면적 범위</label>
+      <div class="sw-row"><select><option>면적 전체</option><option>30㎡ 미만</option><option>30–100㎡</option><option>100–200㎡</option><option>200㎡ 이상</option></select></div>
     </div>
+
+    <div class="sw-group">
+      <label><span class="ic">🛏️</span> 방 수</label>
+      <div class="sw-chips size-sm">
+        <button type="button" class="sw-chip">1</button>
+        <button type="button" class="sw-chip">2</button>
+        <button type="button" class="sw-chip">3+</button>
+      </div>
+    </div>
+
+    <div class="sw-group">
+      <label><span class="ic">⚙️</span> 추가 옵션</label>
+      <div class="sw-toggle-row">
+        <span>단기 임대</span>
+        <input type="checkbox" class="switch" aria-label="단기 임대"/>
+      </div>
+      <div class="sw-toggle-row">
+        <span>풀옵션</span>
+        <input type="checkbox" class="switch" aria-label="풀옵션"/>
+      </div>
+    </div>
+
     <button class="sw-apply" type="button" onclick="window.location.href='listings.html'">필터 적용하기</button>
-  </div>
+  </section>
+
+  <!-- 지역별 매물 -->
+  <section class="sw-card">
+    <h4>지역별 매물</h4>
+    <a href="listings.html" class="sw-region-item">송도동 <span class="count">124</span></a>
+    <a href="listings.html" class="sw-region-item">연수동 <span class="count">48</span></a>
+    <a href="listings.html" class="sw-region-item">청라동 <span class="count">86</span></a>
+    <a href="listings.html" class="sw-region-item">동춘동 <span class="count">32</span></a>
+  </section>
+
 </aside>
 
 <!-- Consultation overlay -->
