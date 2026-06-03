@@ -475,6 +475,16 @@ section.hero { padding: 32px 0 40px; }
   font-family: var(--font-serif); font-style: italic; font-weight: 500; color: var(--accent);
 }
 .section-head .lead { color: var(--ink-3); margin-top: 12px; font-size: 15px; line-height: 1.7; }
+
+/* Center-aligned variant — used by FAQ, Case Results, etc. */
+.section-head--center {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+.section-head--center .hero-eyebrow { margin: 0 auto; }
+.section-head--center .lead { max-width: 560px; margin-left: auto; margin-right: auto; }
 .section-head a.more {
   display: inline-flex; align-items: center; gap: 6px;
   color: var(--ink-2); font-weight: 600; font-size: 14px;
@@ -1695,11 +1705,11 @@ section.hero { padding: 32px 0 40px; }
 }
 .faq-visit .btn-kakao-cta:hover { background: #f4d800; }
 
-/* ===== Floating right widget (매매/매도 문의) ===== */
+/* ===== Floating right widget (매매/매도 문의) — anchored upper-right
+   so it doesn't collide with .float-channels at vertical center. */
 .side-widget {
   position: fixed;
-  right: 20px; top: 50%;
-  transform: translateY(-50%);
+  right: 20px; top: 110px;
   width: 56px;
   background: var(--surface);
   border: 1px solid var(--line);
@@ -1708,8 +1718,13 @@ section.hero { padding: 32px 0 40px; }
   z-index: 70;
   overflow: hidden;
   transition: width .3s cubic-bezier(.2,.7,.2,1);
+  max-height: calc(100vh - 200px);
 }
-.side-widget.is-open { width: 280px; }
+.side-widget.is-open {
+  width: 290px;
+  overflow-y: auto;
+}
+.side-widget.is-open .sw-body { overflow-y: visible; }
 .side-widget .sw-toggle {
   width: 56px; height: 56px;
   display: grid; place-items: center;
@@ -1719,12 +1734,16 @@ section.hero { padding: 32px 0 40px; }
 }
 .side-widget .sw-toggle svg { width: 22px; height: 22px; }
 .side-widget .sw-body {
+  display: none;
   padding: 16px 18px 18px;
-  opacity: 0; visibility: hidden;
-  transition: opacity .2s ease;
 }
-.side-widget.is-open .sw-body { opacity: 1; visibility: visible; transition-delay: .15s; }
-.side-widget.is-open .sw-toggle { position: absolute; top: 4px; right: 4px; width: 36px; height: 36px; }
+.side-widget.is-open .sw-body { display: block; }
+.side-widget.is-open .sw-toggle {
+  position: absolute; top: 4px; right: 4px;
+  width: 36px; height: 36px;
+  z-index: 2;
+}
+.side-widget.is-open .sw-toggle svg { width: 16px; height: 16px; }
 .sw-head {
   font-size: 14px; font-weight: 800; letter-spacing: -0.01em;
   color: var(--ink); margin-bottom: 6px;
