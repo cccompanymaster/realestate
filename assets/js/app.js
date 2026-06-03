@@ -621,6 +621,135 @@
     onScroll();
   }
 
+  // ---------- case results carousel ----------
+  function initCaseCarousel() {
+    const carousel = document.getElementById('case-carousel');
+    if (!carousel) return;
+    const track = carousel.querySelector('.cr-track');
+    const cards = track.querySelectorAll('.cr-card');
+    const prev = carousel.querySelector('.cr-nav.prev');
+    const next = carousel.querySelector('.cr-nav.next');
+    const dotsWrap = document.getElementById('cr-dots');
+    const dots = dotsWrap ? dotsWrap.querySelectorAll('.cr-dot') : [];
+    const total = cards.length;
+    if (!total) return;
+    let idx = 0;
+
+    function setActive(i) {
+      idx = Math.max(0, Math.min(total - 1, i));
+      dots.forEach((d, di) => d.classList.toggle('active', di === idx));
+      if (prev) prev.toggleAttribute('disabled', idx === 0);
+      if (next) next.toggleAttribute('disabled', idx === total - 1);
+    }
+    function goTo(i) {
+      i = Math.max(0, Math.min(total - 1, i));
+      const card = cards[i];
+      track.scrollTo({ left: card.offsetLeft - cards[0].offsetLeft, behavior: 'smooth' });
+      setActive(i);
+    }
+    prev && prev.addEventListener('click', () => goTo(idx - 1));
+    next && next.addEventListener('click', () => goTo(idx + 1));
+    dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+    let tm;
+    track.addEventListener('scroll', () => {
+      clearTimeout(tm);
+      tm = setTimeout(() => {
+        const w = cards[0].getBoundingClientRect().width;
+        const gap = parseFloat(getComputedStyle(track).columnGap || '22') || 22;
+        const i = Math.round(track.scrollLeft / (w + gap));
+        if (i !== idx) setActive(i);
+      }, 80);
+    }, { passive: true });
+    setActive(0);
+  }
+
+  // ---------- office interior slider ----------
+  function initOfficeSlider() {
+    const slider = document.getElementById('office-slider');
+    if (!slider) return;
+    const track = slider.querySelector('.os-track');
+    const slides = track.querySelectorAll('.os-slide');
+    const prev = slider.querySelector('.os-nav.prev');
+    const next = slider.querySelector('.os-nav.next');
+    if (!slides.length) return;
+    function step(dir) {
+      const w = slides[0].getBoundingClientRect().width;
+      const gap = parseFloat(getComputedStyle(track).columnGap || '16') || 16;
+      track.scrollBy({ left: dir * (w + gap), behavior: 'smooth' });
+    }
+    prev && prev.addEventListener('click', () => step(-1));
+    next && next.addEventListener('click', () => step(1));
+  }
+
+  // ---------- FAQ tabs + accordion ----------
+  function initFAQ() {
+    const tabs = document.getElementById('faq-tabs');
+    const list = document.getElementById('faq-list');
+    if (!tabs || !list) return;
+
+    const DATA = {
+      sale: [
+        { q: '송도 신축 사무실 분양가는 어느 정도인가요?', a: '2026년 기준 송도 IBD 핵심 단지 분양가는 평당 2,000~2,400만원 선입니다. 동·층·향에 따라 차이가 있어 단지별 평면도 기준으로 정확한 시세를 알려드립니다.' },
+        { q: '분양권 전매가 가능한가요?', a: '단지별 전매 제한 기간과 조건이 다릅니다. 전매 가능 여부, 양도세, 세부 절차까지 1:1 상담 시 자세히 안내해 드립니다.' },
+        { q: '대출은 어느 정도 가능한가요?', a: '법인·개인, 신용도, LTV에 따라 다릅니다. 협력 금융기관 3곳 비교로 최저 금리·최대 한도를 확보해 드립니다.' },
+      ],
+      own: [
+        { q: '법인 사옥 매입 시 취득세는 얼마인가요?', a: '법인 본점 이전 여부와 과세표준에 따라 4.6%~9.4% 차이가 있습니다. 정확한 산출은 시뮬레이션으로 안내드립니다.' },
+        { q: '사옥 매입 전체 절차와 기간은?', a: '후보 매물 선정 → 권리분석 → 협상 → 계약 → 잔금까지 평균 6~10주 소요됩니다. 단축이 필요한 경우 동시 진행이 가능합니다.' },
+        { q: '리노베이션이 필요한 매물도 매칭 가능한가요?', a: '인테리어 협력 업체와 함께 리노베이션 견적까지 통합 제안해 드립니다.' },
+      ],
+      rent: [
+        { q: '임대 보증금을 낮출 수 있나요?', a: '시세 비교 자료를 기반으로 임대인과 직접 협상해 보증금 또는 월세를 조정해 드립니다.' },
+        { q: '렌트프리는 어떻게 받아낼 수 있나요?', a: '입주 전 인테리어 기간, 장기 계약 조건 등을 활용해 1~3개월의 렌트프리를 협상하는 사례가 많습니다.' },
+        { q: '관리비는 별도인가요?', a: '평형·층별 관리비는 단지마다 다릅니다. 매물별 평균 관리비를 함께 안내해 드립니다.' },
+      ],
+      invest: [
+        { q: '오피스 투자 수익률은 어느 정도인가요?', a: '송도 오피스 평균 임대 수익률은 연 4~6% 수준이며, 입지·층·임차인에 따라 차이가 있습니다.' },
+        { q: '지식산업센터 투자도 가능한가요?', a: '업종 제한·취득세 감면 조건이 있어 사전 검토가 필요합니다. 사례 기반으로 분석해 드립니다.' },
+        { q: '공실 위험은 어떻게 관리하나요?', a: '임차 보증보험, 우량 임차인 매칭, 매각 출구 전략까지 통합 컨설팅이 가능합니다.' },
+      ],
+    };
+
+    function render(cat) {
+      const items = DATA[cat] || [];
+      list.innerHTML = items.map((it, i) => `
+        <div class="faq-item${i === 0 ? ' is-open' : ''}">
+          <button class="faq-q" type="button">
+            <span><span class="q-mark">Q.</span> ${it.q}</span>
+            <span class="q-toggle">+</span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner"><p>${it.a}</p></div></div>
+        </div>
+      `).join('');
+      list.querySelectorAll('.faq-q').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const item = btn.closest('.faq-item');
+          item.classList.toggle('is-open');
+        });
+      });
+    }
+
+    tabs.querySelectorAll('.faq-tab').forEach((tab) => {
+      tab.addEventListener('click', () => {
+        tabs.querySelectorAll('.faq-tab').forEach((t) => t.classList.remove('active'));
+        tab.classList.add('active');
+        render(tab.dataset.faqCat);
+      });
+    });
+    render('sale');
+  }
+
+  // ---------- floating side widget (매매/매도 문의) ----------
+  function initSideWidget() {
+    const widget = document.getElementById('side-widget');
+    if (!widget) return;
+    const toggle = widget.querySelector('.sw-toggle');
+    toggle && toggle.addEventListener('click', () => widget.classList.toggle('is-open'));
+    widget.querySelectorAll('.sw-chip').forEach((chip) => {
+      chip.addEventListener('click', () => chip.classList.toggle('selected'));
+    });
+  }
+
   // ---------- reveal on scroll ----------
   function initReveal() {
     const targets = document.querySelectorAll('.reveal');
@@ -743,6 +872,10 @@
     initPost();
     initDetail();
     initRealtorCarousel();
+    initCaseCarousel();
+    initOfficeSlider();
+    initFAQ();
+    initSideWidget();
     initBottomCTA();
     initConsult();
     initAI();
